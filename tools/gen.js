@@ -15,7 +15,8 @@ const bylab = a => a.kategori === "Opini" ? "Opini" : "Oleh";
 const BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 const tgl = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${+m[3]} ${BULAN[+m[2] - 1]} ${m[1]}` : ""; };
 const isB = a => a.kategori === "Berita";
-const kicker = a => `<div class="kicker"><span class="tag">${e(a.kategori)}</span><span>${isB(a) && a.tanggal ? tgl(a.tanggal) + " · " : ""}${a.menit || 2} menit baca</span></div>`;
+const lab = a => isB(a) ? "Update" : a.kategori;
+const kicker = a => `<div class="kicker"><span class="tag">${e(lab(a))}</span><span>${isB(a) && a.tanggal ? tgl(a.tanggal) + " · " : ""}${a.menit || 2} menit baca</span></div>`;
 const byDate = (p, q) => ((q.tanggal || "") + (q.jam || "")).localeCompare((p.tanggal || "") + (p.jam || ""));
 
 window.AntaralaGen = { build, SITE };
@@ -39,7 +40,7 @@ function build(ARTICLES, opts) {
   const ORG = { "@type": "Organization", name: "Antarala", url: SITE, logo: { "@type": "ImageObject", url: SITE + "assets/img/icon-512.png", width: 512, height: 512 }, sameAs: [IG, TT] };
 
   function page(title, desc, body, root, path, active, ogImg = "og-antarala.jpg", ld = null, ogType = "website") {
-    const nav = [["index.html", "Beranda", "home"], ["berita.html", "Berita", "berita"], ["opini.html", "Artikel", "opini"], ["tentang.html", "Tentang", "tentang"], ["kontak.html", "Kontak", "kontak"]];
+    const nav = [["index.html", "Beranda", "home"], ["update.html", "Update", "berita"], ["opini.html", "Artikel", "opini"], ["tentang.html", "Tentang", "tentang"], ["kontak.html", "Kontak", "kontak"]];
     const links = nav.map(([h, t, k]) => `<a href="${root}${h}"${k === active ? " aria-current=page" : ""}>${t}</a>`).join("");
     const url = SITE + (path === "index.html" ? "" : path);
     const msg = "Punya opini soal musik, kultur, atau hidup sehari-hari? Sumbang tulisanmu ke Antarala";
@@ -90,7 +91,7 @@ ${body}
 </main>
 <footer class="foot"><div class="wrap">
   <div><img src="${A}img/logo-light.png" alt="antarala" width="134" height="30"><p>${BIO}</p></div>
-  <div><h4>Jelajahi</h4><ul><li><a href="${root}index.html">Beranda</a></li><li><a href="${root}berita.html">Berita</a></li><li><a href="${root}opini.html">Artikel</a></li><li><a href="${root}tentang.html">Tentang</a></li><li><a href="${root}kontak.html">Kontak</a></li></ul></div>
+  <div><h4>Jelajahi</h4><ul><li><a href="${root}index.html">Beranda</a></li><li><a href="${root}update.html">Update</a></li><li><a href="${root}opini.html">Artikel</a></li><li><a href="${root}tentang.html">Tentang</a></li><li><a href="${root}kontak.html">Kontak</a></li></ul></div>
   <div><h4>Ikuti</h4><ul><li><a href="${IG}" target="_blank" rel="noopener">Instagram</a></li><li><a href="${TT}" target="_blank" rel="noopener">TikTok</a></li><li><a href="mailto:${EMAIL}">${EMAIL}</a></li></ul></div>
   <div class="copy">© 2026 Antarala. Bagian dari FUTURINC.</div>
 </div></footer>
@@ -126,7 +127,7 @@ ${body}
   ${follow(true)}
 </div></section>
 ${NEWS.length ? `<section class="band"><div class="wrap">
-  <div class="sec-head"><h2 class="h-l">Berita terbaru</h2><a href="berita.html">Semua berita →</a></div>
+  <div class="sec-head"><h2 class="h-l">Update terbaru</h2><a href="update.html">Semua update →</a></div>
   <div class="grid3">${NEWS.slice(0, 6).map(a => card(a)).join("")}</div>
 </div></section>` : ""}
 <section class="band"><div class="wrap">
@@ -161,12 +162,12 @@ go(0);play();}</script>`;
     { "@context": "https://schema.org", "@type": "WebSite", name: "Antarala", alternateName: ["antarala", "Antarala Media"], url: SITE, description: BIO, inLanguage: "id-ID", publisher: ORG });
 
   // daftar artikel
-  const rows = MAIN.concat(NEWS).map(a => `<a class="row" data-k="${e(a.kategori.toLowerCase())}" href="artikel/${a.slug}.html"><div class="ph">${media(a, "")}</div>
+  const rows = MAIN.concat(NEWS).map(a => `<a class="row" data-k="${e(lab(a).toLowerCase())}" href="artikel/${a.slug}.html"><div class="ph">${media(a, "")}</div>
 <div>${kicker(a)}<h2>${a.judul}</h2><p>${a.ringkas}</p><div class="by">Oleh <b>${e(a.penulis)}</b></div></div></a>`).join("");
   out["opini.html"] = page("Artikel — Antarala", "Kumpulan opini dan kabar musik Antarala soal musik, kultur, dan hidup sehari-hari.", `<section class="band"><div class="wrap">
   <div class="sec-head"><h1 class="h-xl">Artikel</h1></div>
-  <p class="lede" style="margin:-8px 0 20px">Opini, feature, dan berita dari teman-teman Antarala: soal lagu, musisi, dan hidup di sekitarnya.</p>
-  <div class="tabs" role="tablist"><a href="#semua" data-f="semua">Semua</a><a href="#opini" data-f="opini">Opini</a><a href="#feature" data-f="feature">Feature</a><a href="#berita" data-f="berita">Berita</a></div>
+  <p class="lede" style="margin:-8px 0 20px">Opini, feature, dan update dari teman-teman Antarala: soal lagu, musisi, dan hidup di sekitarnya.</p>
+  <div class="tabs" role="tablist"><a href="#semua" data-f="semua">Semua</a><a href="#opini" data-f="opini">Opini</a><a href="#feature" data-f="feature">Feature</a><a href="#update" data-f="update">Update</a></div>
   <div class="rows">${rows}</div>
 <script>{function f(){const k=(location.hash||'#semua').slice(1);document.querySelectorAll('.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.f==k));
 document.querySelectorAll('.row').forEach(r=>r.hidden=!(k=='semua'||r.dataset.k==k));}addEventListener('hashchange',f);f();}</script>
@@ -175,11 +176,12 @@ document.querySelectorAll('.row').forEach(r=>r.hidden=!(k=='semua'||r.dataset.k=
   // berita
   const nrows = NEWS.map(a => `<a class="row" href="artikel/${a.slug}.html"><div class="ph">${media(a, "")}</div>
 <div>${kicker(a)}<h2>${a.judul}</h2><p>${a.ringkas}</p><div class="by">Oleh <b>${e(a.penulis)}</b></div></div></a>`).join("");
-  out["berita.html"] = page("Berita Terbaru — Antarala", "Kabar terbaru musik Indonesia, musik internasional, konser, festival, dan kultur pop dari Antarala.", `<section class="band"><div class="wrap">
-  <div class="sec-head"><h1 class="h-xl">Berita terbaru</h1></div>
+  out["update.html"] = page("Update Terbaru — Antarala", "Kabar terbaru musik Indonesia, musik internasional, konser, festival, dan kultur pop dari Antarala.", `<section class="band"><div class="wrap">
+  <div class="sec-head"><h1 class="h-xl">Update terbaru</h1></div>
   <p class="lede" style="margin:-8px 0 20px">Kabar musik, konser, dan kultur pop yang lagi rame, dirangkum tiap hari sama Redaksi Antarala.</p>
-  ${nrows || '<p class="lede">Belum ada berita. Cek lagi besok pagi.</p>'}
-</div></section>`, "", "berita.html", "berita");
+  ${nrows || '<p class="lede">Belum ada update. Cek lagi besok pagi.</p>'}
+</div></section>`, "", "update.html", "berita");
+  out["berita.html"] = `<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><title>Update — Antarala</title><link rel="canonical" href="${SITE}update.html"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=update.html"></head><body><a href="update.html">Update terbaru Antarala</a></body></html>`;
 
   // tentang
   out["tentang.html"] = page("Tentang — Antarala", BIO, `<section class="band"><div class="wrap about">
@@ -192,7 +194,7 @@ document.querySelectorAll('.row').forEach(r=>r.hidden=!(k=='semua'||r.dataset.k=
       <div><b>Musik</b><span>Rilisan, panggung, dan cerita di balik lagu.</span></div>
       <div><b>Kultur</b><span>Hal-hal yang sedang ramai dan kenapa itu penting.</span></div>
       <div><b>Pikiran</b><span>Opini personal yang jujur dan berimbang.</span></div>
-      <div><b>Kabar</b><span>Berita singkat yang menarik buat diikuti.</span></div>
+      <div><b>Update</b><span>Kabar singkat yang menarik buat diikuti.</span></div>
     </div>
     <p style="margin-top:28px">Punya opini soal lagu, musisi, atau hidup sehari-hari? <a href="${mailto("Sumbang Tulisan")}">Sumbang tulisanmu</a>.</p>
     ${follow()}
@@ -221,7 +223,7 @@ document.querySelectorAll('.row').forEach(r=>r.hidden=!(k=='semua'||r.dataset.k=
     const others = (isB(a) ? NEWS : MAIN).filter(x => x !== a).slice(0, 3);
     const path = `artikel/${a.slug}.html`;
     const ld = { "@context": "https://schema.org", "@type": isB(a) ? "NewsArticle" : "Article", headline: a.judul, description: a.ringkas, image: [SITE + "assets/img/" + a.cover],
-      author: { "@type": "Person", name: a.penulis }, publisher: ORG, inLanguage: "id-ID", mainEntityOfPage: SITE + path, articleSection: a.kategori, primaryImageOfPage: SITE + "assets/img/" + a.cover };
+      author: { "@type": "Person", name: a.penulis }, publisher: ORG, inLanguage: "id-ID", mainEntityOfPage: SITE + path, articleSection: lab(a), primaryImageOfPage: SITE + "assets/img/" + a.cover };
     if (a.tanggal) ld.datePublished = a.tanggal; if (a.diperbarui) ld.dateModified = a.diperbarui;
     const body = `<article>
 <div class="wrap"><header class="art-head">${kicker(a)}<h1>${a.judul}</h1><p class="dek">${a.ringkas}</p><div class="by">${bylab(a)} <b>${e(a.penulis)}</b>${a.tanggal ? " · " + tgl(a.tanggal) : ""}</div></header>
@@ -238,7 +240,7 @@ ${ig}
 </div></div>
 </article>
 <section class="band" style="padding-top:0"><div class="wrap">
-<div class="sec-head"><h2 class="h-l">Baca juga</h2><a href="../${isB(a) ? "berita" : "opini"}.html">${isB(a) ? "Semua berita" : "Semua artikel"} →</a></div>
+<div class="sec-head"><h2 class="h-l">Baca juga</h2><a href="../${isB(a) ? "update" : "opini"}.html">${isB(a) ? "Semua update" : "Semua artikel"} →</a></div>
 <div class="grid3">${others.map(o => card(o, "../")).join("")}</div>
 </div></section>
 <script>{const u=encodeURIComponent(location.href),t=encodeURIComponent(document.title);
@@ -250,7 +252,7 @@ document.getElementById('cp').addEventListener('click',()=>{navigator.clipboard.
 
   // sitemap, robots, feed
   const latest = ARTICLES.map(a => a.diperbarui || a.tanggal || "").sort().pop() || new Date().toISOString().slice(0, 10);
-  const urls = ["", "berita.html", "opini.html", "tentang.html", "kontak.html"].map(u => [u, latest]).concat(ARTICLES.map(a => [`artikel/${a.slug}.html`, a.diperbarui || latest]));
+  const urls = ["", "update.html", "opini.html", "tentang.html", "kontak.html"].map(u => [u, latest]).concat(ARTICLES.map(a => [`artikel/${a.slug}.html`, a.diperbarui || latest]));
   out["sitemap.xml"] = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, d]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod></url>\n`).join("")}</urlset>\n`;
   out["site.webmanifest"] = JSON.stringify({ name: "Antarala", short_name: "Antarala", start_url: "/", display: "standalone", background_color: "#f4f1ea", theme_color: "#1e1e1e",
     icons: [{ src: "/assets/img/icon-192.png", sizes: "192x192", type: "image/png" }, { src: "/assets/img/icon-512.png", sizes: "512x512", type: "image/png" }] }, null, 1);
@@ -261,7 +263,7 @@ document.getElementById('cp').addEventListener('click',()=>{navigator.clipboard.
   <title>Antarala</title><link>${SITE}</link><description>${e(BIO)}</description><language>id</language>
   <atom:link href="${SITE}feed.xml" rel="self" type="application/rss+xml"/>
 ${ARTICLES.slice().sort(byDate).slice(0, 50).map(a => `  <item><title>${e(stripTags(a.judul))}</title><link>${SITE}artikel/${a.slug}.html</link><guid>${SITE}artikel/${a.slug}.html</guid>
-    <description>${e(stripTags(a.ringkas))}</description><category>${e(a.kategori)}</category><author>${EMAIL} (${e(a.penulis)})</author><pubDate>${rfc(a.tanggal)}</pubDate></item>\n`).join("")}</channel></rss>
+    <description>${e(stripTags(a.ringkas))}</description><category>${e(lab(a))}</category><author>${EMAIL} (${e(a.penulis)})</author><pubDate>${rfc(a.tanggal)}</pubDate></item>\n`).join("")}</channel></rss>
 `;
   return out;
 }

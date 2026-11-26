@@ -20,7 +20,7 @@ def draw(judul, tanggal, out):
     lw = 200; logo = logo.resize((lw, round(lw * logo.height / logo.width)), Image.LANCZOS)
     im.paste(logo, (80, 130), logo)
     f26 = ImageFont.truetype(os.path.join(F, "figtree-latin-600-normal.ttf"), 26)
-    k = "BERITA"; kw = x.textlength(k, font=f26) + 40
+    k = "UPDATE"; kw = x.textlength(k, font=f26) + 40
     x.rounded_rectangle((80, 250, 80 + kw, 296), radius=23, fill="#f1ede4")
     x.text((100, 282), k, font=f26, fill="#1e1e1e", anchor="ls")
     x.text((100 + kw, 282), tgl(tanggal), font=f26, fill="#b4b1ab", anchor="ls")

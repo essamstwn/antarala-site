@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://antarala.futurinc.co.id/sitemap.xml

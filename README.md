@@ -1,4 +1,4 @@
-# Antarala — antarala.futurinc.co.id
+# Antarala — antarala.co.id
 
 Website statis Antarala. Isinya dibangun dari `content/` jadi HTML siap tayang di `public/`.
 
@@ -21,7 +21,7 @@ Selain field lama (slug, judul, ringkas, penulis, kategori, isi, referensi, dst.
 ## Halaman yang dibuat otomatis
 Beranda, `update.html`, `opini.html`, `feature.html` (12 per halaman), `topik/*`, `tag/*`, `penulis/*`, artikel, `tentang.html`, `pedoman.html`, `kontak.html`, `cari.html` + `search.json`, `404.html`, `sitemap.xml`, `news-sitemap.xml`, `feed.xml`, `robots.txt`, `llms.txt`.
 
-## Pindah ke antarala.co.id
-Setelah https://antarala.co.id aktif (addon domain + SSL di cPanel): ganti `SITE` di `tools/gen.js` (dan gen.js di editor), aktifkan 2 baris redirect di `static/.htaccess`, build, push. Lalu tambahkan property baru di Search Console dan submit sitemap.
+## Domain
+Domain utama: https://antarala.co.id (addon domain di cPanel, folder yang sama dengan antarala.futurinc.co.id). Alamat lama antarala.futurinc.co.id dialihkan 301 ke domain baru lewat `static/.htaccess`. `SITE` di `tools/gen.js` (dan gen.js di editor) harus selalu https://antarala.co.id/.
 
 Berita harian ditulis otomatis oleh Claude tiap pagi, di-build, lalu di-push ke repo ini.

@@ -38,7 +38,7 @@ def draw(judul, tanggal, out):
     for i, l in enumerate(lines[:5]):
         x.text((80, 360 + size + i * size * 1.12), l, font=fn, fill="#f1ede4", anchor="ls")
     f24 = ImageFont.truetype(os.path.join(F, "figtree-latin-500-normal.ttf"), 24)
-    x.text((80, 800), "antarala.futurinc.co.id", font=f24, fill="#9c9994", anchor="ls")
+    x.text((80, 800), "antarala.co.id", font=f24, fill="#9c9994", anchor="ls")
     im.save(out, quality=88)
 
 if __name__ == "__main__":

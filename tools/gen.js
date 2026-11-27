@@ -9,7 +9,7 @@
      poin      : ["poin penting 1", "poin 2"]                         -> kotak "Intinya" (bagus untuk Google & AI)
    opts: ga, ver, webp (true = pakai assets/img/w/*.webp), assets (URL aset preview), img(a) (URL cover preview). */
 (function () {
-const SITE = "https://antarala.futurinc.co.id/";
+const SITE = "https://antarala.co.id/";
 const IG = "https://www.instagram.com/antarala__/";
 const TT = "https://www.tiktok.com/@antarala__";
 const EMAIL = "antarala@futurinc.co.id";

@@ -19,5 +19,5 @@ User-agent: DuckAssistBot
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://antarala.futurinc.co.id/sitemap.xml
-Sitemap: https://antarala.futurinc.co.id/news-sitemap.xml
+Sitemap: https://antarala.co.id/sitemap.xml
+Sitemap: https://antarala.co.id/news-sitemap.xml

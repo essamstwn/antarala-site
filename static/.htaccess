@@ -36,9 +36,10 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-# ---- PINDAH DOMAIN: aktifkan 2 baris di bawah SETELAH https://antarala.co.id sudah bisa dibuka dengan SSL ----
-# RewriteCond %{HTTP_HOST} ^antarala\.futurinc\.co\.id$ [NC]
-# RewriteRule ^(.*)$ https://antarala.co.id/$1 [L,R=301]
+# Domain lama -> domain utama antarala.co.id (301 permanen, path tetap sama)
+RewriteCond %{HTTP_HOST} ^antarala\.futurinc\.co\.id$ [NC]
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteRule ^(.*)$ https://antarala.co.id/$1 [L,R=301]
 
 # /index.html -> /
 RewriteCond %{THE_REQUEST} \s/+index\.html[?\s]

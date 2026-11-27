@@ -40,7 +40,9 @@ const TOPIK = {
     desc: "Tren kultur pop, gaya hidup, dan pikiran-pikiran soal hidup sehari-hari dari Antarala." }
 };
 // bio penulis (opsional). Isi di sini kalau ada.
+const REDAKSI = { pemred: "Essam Setiawan", editor: "Syilfa Adistya" };
 const AUTHORS = {
+  "Essam Setiawan": { bio: "Pemimpin Redaksi Antarala." },
   "Redaksi Antarala": { org: true, bio: "Tim redaksi Antarala. Merangkum kabar musik dan kultur pop terbaru setiap hari, dengan minimal dua sumber kredibel atau satu sumber resmi untuk setiap kabar." }
 };
 
@@ -121,7 +123,8 @@ function build(ARTICLES, opts) {
   // ---- schema dasar
   const ORG = { "@type": "NewsMediaOrganization", "@id": SITE + "#org", name: "Antarala", alternateName: ["antarala", "Antarala Media"], url: SITE,
     logo: { "@type": "ImageObject", url: SITE + "assets/img/icon-512.png", width: 512, height: 512 }, description: ABOUT, email: EMAIL,
-    sameAs: [IG, TT], parentOrganization: PARENT, publishingPrinciples: SITE + "pedoman.html", ethicsPolicy: SITE + "pedoman.html", correctionsPolicy: SITE + "pedoman.html#koreksi" };
+    sameAs: [IG, TT], parentOrganization: PARENT, masthead: SITE + "tentang.html#redaksi",
+    employee: [{ "@type": "Person", name: REDAKSI.pemred, jobTitle: "Pemimpin Redaksi", url: SITE + "penulis/" + slugify(REDAKSI.pemred) + ".html" }, { "@type": "Person", name: REDAKSI.editor, jobTitle: "Editor" }], publishingPrinciples: SITE + "pedoman.html", ethicsPolicy: SITE + "pedoman.html", correctionsPolicy: SITE + "pedoman.html#koreksi" };
   const WEBSITE = { "@type": "WebSite", "@id": SITE + "#web", name: "Antarala", url: SITE, inLanguage: "id-ID", description: BIO, publisher: { "@id": SITE + "#org" },
     potentialAction: { "@type": "SearchAction", target: { "@type": "EntryPoint", urlTemplate: SITE + "cari.html?q={search_term_string}" }, "query-input": "required name=search_term_string" } };
   const crumbs = list => ({ "@type": "BreadcrumbList", itemListElement: list.map(([name, url], i) => ({ "@type": "ListItem", position: i + 1, name, item: url })) });
@@ -344,7 +347,7 @@ ${ft.length ? sec("Feature", "feature.html", "Semua feature", `<div class="g3">$
     const author = auInfo.org ? { "@type": "Organization", name: a.penulis, url: SITE + `penulis/${auSlug}.html` } : { "@type": "Person", "@id": SITE + `penulis/${auSlug}.html#person`, name: a.penulis, url: SITE + `penulis/${auSlug}.html` };
     const ld = [ORG, crumbs(cr), { "@type": type, "@id": url + "#artikel", headline: strip(a.judul).slice(0, 110), alternativeHeadline: a.judulSeo ? strip(a.judulSeo) : undefined, description: strip(a.ringkas), url,
       mainEntityOfPage: { "@type": "WebPage", "@id": url }, image: { "@type": "ImageObject", url: SITE + "assets/img/" + a.cover, width: 1200, height: 900, caption: strip(a.alt) },
-      datePublished: pub || undefined, dateModified: mod || undefined, author, publisher: { "@id": SITE + "#org" }, inLanguage: "id-ID", articleSection: r.nama,
+      datePublished: pub || undefined, dateModified: mod || undefined, author, editor: { "@type": "Person", name: REDAKSI.editor }, publisher: { "@id": SITE + "#org" }, inLanguage: "id-ID", articleSection: r.nama,
       keywords: tags.map(t => t.nama).concat([T.nama]).join(", ") || undefined, about: tags.slice(0, 5).map(t => ({ "@type": "Thing", name: t.nama })), wordCount: words, isAccessibleForFree: true,
       citation: (a.referensi || []).filter(x => x[1]).map(x => x[1]) }];
     const artMeta = `<meta property="article:published_time" content="${pub}">\n<meta property="article:modified_time" content="${mod}">\n<meta property="article:section" content="${e(r.nama)}">\n${tags.map(t => `<meta property="article:tag" content="${e(t.nama)}">\n`).join("")}<meta name="author" content="${e(a.penulis)}">\n`;
@@ -398,7 +401,9 @@ document.querySelectorAll('.yt-f').forEach(f=>f.querySelector('button').onclick=
   <div><b>Opini</b><span>Pandangan personal yang jujur dari penulis dan pendengar.</span></div>
 </div>
 <h2>Siapa di balik Antarala</h2>
-<p>Antarala adalah bagian dari <a href="https://futurinc.co.id/" rel="noopener">FUTURINC</a>, agensi digital di Indonesia. Update harian disusun oleh Redaksi Antarala, sementara feature dan opini ditulis oleh para kontributor di bawah ini.</p>
+<p>Antarala adalah bagian dari <a href="https://futurinc.co.id/" rel="noopener">FUTURINC</a>, agensi digital di Indonesia. Update harian disusun oleh Redaksi Antarala, sementara feature dan opini ditulis oleh para kontributor.</p>
+<h2 id="redaksi">Susunan redaksi</h2>
+<ul class="wr"><li><a href="penulis/${slugify(REDAKSI.pemred)}.html">${REDAKSI.pemred}</a><span>Pemimpin Redaksi</span></li><li><b>${REDAKSI.editor}</b><span>Editor</span></li><li><b>Penulis</b><span>Tercantum di setiap tulisan</span></li></ul>
 <h2 id="penulis">Penulis</h2>
 <ul class="wr">${writers.map(w => `<li><a href="penulis/${w.slug}.html">${e(w.nama)}</a><span>${w.items.length} tulisan</span></li>`).join("")}</ul>
 <h2>Cara kami bekerja</h2>

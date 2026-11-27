@@ -161,26 +161,45 @@ go(0);play();}</script>`;
   out["index.html"] = page("Antarala — musik, kultur, pikiran", BIO, home, "", "index.html", "home", "og-antarala.jpg",
     { "@context": "https://schema.org", "@type": "WebSite", name: "Antarala", alternateName: ["antarala", "Antarala Media"], url: SITE, description: BIO, inLanguage: "id-ID", publisher: ORG });
 
-  // daftar artikel
-  const rows = MAIN.concat(NEWS).map(a => `<a class="row" data-k="${e(lab(a).toLowerCase())}" href="artikel/${a.slug}.html"><div class="ph">${media(a, "")}</div>
-<div>${kicker(a)}<h2>${a.judul}</h2><p>${a.ringkas}</p><div class="by">Oleh <b>${e(a.penulis)}</b></div></div></a>`).join("");
-  out["opini.html"] = page("Artikel — Antarala", "Kumpulan opini dan kabar musik Antarala soal musik, kultur, dan hidup sehari-hari.", `<section class="band"><div class="wrap">
-  <div class="sec-head"><h1 class="h-xl">Artikel</h1></div>
-  <p class="lede" style="margin:-8px 0 20px">Opini, feature, dan update dari teman-teman Antarala: soal lagu, musisi, dan hidup di sekitarnya.</p>
-  <div class="tabs" role="tablist"><a href="#semua" data-f="semua">Semua</a><a href="#opini" data-f="opini">Opini</a><a href="#feature" data-f="feature">Feature</a><a href="#update" data-f="update">Update</a></div>
-  <div class="rows">${rows}</div>
-<script>{function f(){const k=(location.hash||'#semua').slice(1);document.querySelectorAll('.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.f==k));
-document.querySelectorAll('.row').forEach(r=>r.hidden=!(k=='semua'||r.dataset.k==k));}addEventListener('hashchange',f);f();}</script>
-</div></section>`, "", "opini.html", "opini");
-
-  // berita
-  const nrows = NEWS.map(a => `<a class="row" href="artikel/${a.slug}.html"><div class="ph">${media(a, "")}</div>
-<div>${kicker(a)}<h2>${a.judul}</h2><p>${a.ringkas}</p><div class="by">Oleh <b>${e(a.penulis)}</b></div></div></a>`).join("");
-  out["update.html"] = page("Update Terbaru — Antarala", "Kabar terbaru musik Indonesia, musik internasional, konser, festival, dan kultur pop dari Antarala.", `<section class="band"><div class="wrap">
-  <div class="sec-head"><h1 class="h-xl">Update terbaru</h1></div>
-  <p class="lede" style="margin:-8px 0 20px">Kabar musik, konser, dan kultur pop yang lagi rame, dirangkum tiap hari sama Redaksi Antarala.</p>
-  ${nrows || '<p class="lede">Belum ada update. Cek lagi besok pagi.</p>'}
-</div></section>`, "", "update.html", "berita");
+  // daftar artikel & update, 10 per halaman
+  const PER = 10, extraUrls = [];
+  const rowHtml = a => `<a class="row" href="artikel/${a.slug}.html"><div class="ph">${media(a, "")}</div>
+<div>${kicker(a)}<h2>${a.judul}</h2><p>${a.ringkas}</p><div class="by">Oleh <b>${e(a.penulis)}</b></div></div></a>`;
+  const pname = (base, n) => n === 1 ? base + ".html" : `${base}-${n}.html`;
+  function pager(base, n, total) {
+    if (total < 2) return "";
+    const nums = [];
+    for (let k = 1; k <= total; k++) {
+      if (k === 1 || k === total || Math.abs(k - n) <= 1) nums.push(k);
+      else if (nums[nums.length - 1] !== "…") nums.push("…");
+    }
+    const prev = n > 1 ? `<a class="pg-nav" rel="prev" href="${pname(base, n - 1)}">← Sebelumnya</a>` : `<span class="pg-nav off">← Sebelumnya</span>`;
+    const next = n < total ? `<a class="pg-nav" rel="next" href="${pname(base, n + 1)}">Berikutnya →</a>` : `<span class="pg-nav off">Berikutnya →</span>`;
+    return `<nav class="pager" aria-label="Halaman">${prev}<span class="pg-nums">${nums.map(k => k === "…" ? `<span class="pg-gap">…</span>` : k === n ? `<span class="pg-num" aria-current="page">${k}</span>` : `<a class="pg-num" href="${pname(base, k)}">${k}</a>`).join("")}</span>${next}</nav>`;
+  }
+  function listPages(base, items, { title, desc, h1, lede, tabs = "", active, empty }) {
+    const total = Math.max(1, Math.ceil(items.length / PER));
+    for (let n = 1; n <= total; n++) {
+      const chunk = items.slice((n - 1) * PER, n * PER);
+      const ttl = n === 1 ? title : `${title.split(" — ")[0]} (halaman ${n}) — Antarala`;
+      out[pname(base, n)] = page(ttl, desc, `<section class="band"><div class="wrap">
+  <div class="sec-head"><h1 class="h-xl">${h1}${n > 1 ? ` <span class="pg-of">halaman ${n}</span>` : ""}</h1></div>
+  <p class="lede" style="margin:-8px 0 20px">${lede}</p>
+  ${tabs}
+  <div class="rows">${chunk.map(rowHtml).join("") || `<p class="lede">${empty}</p>`}</div>
+  ${pager(base, n, total)}
+</div></section>`, "", pname(base, n), active);
+      if (n > 1) extraUrls.push(pname(base, n));
+    }
+  }
+  const ALL = MAIN.concat(NEWS).slice().sort(byDate);
+  const tabBar = cur => `<div class="tabs">${[["opini", "Semua", "semua"], ["artikel-opini", "Opini", "opini"], ["artikel-feature", "Feature", "feature"], ["update", "Update", "update"]].map(([h, t, k]) => `<a href="${h}.html"${k === cur ? ' aria-current="true"' : ""}>${t}</a>`).join("")}</div>`;
+  const artLede = "Opini, feature, dan update dari teman-teman Antarala: soal lagu, musisi, dan hidup di sekitarnya.";
+  const artDesc = "Kumpulan opini dan kabar musik Antarala soal musik, kultur, dan hidup sehari-hari.";
+  listPages("opini", ALL, { title: "Artikel — Antarala", desc: artDesc, h1: "Artikel", lede: artLede, tabs: tabBar("semua"), active: "opini", empty: "Belum ada artikel." });
+  listPages("artikel-opini", ALL.filter(a => a.kategori === "Opini"), { title: "Opini — Antarala", desc: "Opini personal soal musik, kultur, dan hidup sehari-hari dari penulis Antarala.", h1: "Artikel", lede: artLede, tabs: tabBar("opini"), active: "opini", empty: "Belum ada opini." });
+  listPages("artikel-feature", ALL.filter(a => a.kategori === "Feature"), { title: "Feature — Antarala", desc: "Feature soal rilisan, musisi, dan cerita di balik lagu dari Antarala.", h1: "Artikel", lede: artLede, tabs: tabBar("feature"), active: "opini", empty: "Belum ada feature." });
+  listPages("update", NEWS, { title: "Update Terbaru — Antarala", desc: "Kabar terbaru musik Indonesia, musik internasional, konser, festival, dan kultur pop dari Antarala.", h1: "Update terbaru", lede: "Kabar musik, konser, dan kultur pop yang lagi rame, dirangkum tiap hari sama Redaksi Antarala.", active: "berita", empty: "Belum ada update. Cek lagi besok pagi." });
   out["berita.html"] = `<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><title>Update — Antarala</title><link rel="canonical" href="${SITE}update.html"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=update.html"></head><body><a href="update.html">Update terbaru Antarala</a></body></html>`;
 
   // tentang
@@ -252,7 +271,7 @@ document.getElementById('cp').addEventListener('click',()=>{navigator.clipboard.
 
   // sitemap, robots, feed
   const latest = ARTICLES.map(a => a.diperbarui || a.tanggal || "").sort().pop() || new Date().toISOString().slice(0, 10);
-  const urls = ["", "update.html", "opini.html", "tentang.html", "kontak.html"].map(u => [u, latest]).concat(ARTICLES.map(a => [`artikel/${a.slug}.html`, a.diperbarui || latest]));
+  const urls = ["", "update.html", "opini.html", "artikel-opini.html", "artikel-feature.html", "tentang.html", "kontak.html"].concat(extraUrls).map(u => [u, latest]).concat(ARTICLES.map(a => [`artikel/${a.slug}.html`, a.diperbarui || latest]));
   out["sitemap.xml"] = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, d]) => `  <url><loc>${SITE}${u}</loc><lastmod>${d}</lastmod></url>\n`).join("")}</urlset>\n`;
   out["site.webmanifest"] = JSON.stringify({ name: "Antarala", short_name: "Antarala", start_url: "/", display: "standalone", background_color: "#f4f1ea", theme_color: "#1e1e1e",
     icons: [{ src: "/assets/img/icon-192.png", sizes: "192x192", type: "image/png" }, { src: "/assets/img/icon-512.png", sizes: "512x512", type: "image/png" }] }, null, 1);

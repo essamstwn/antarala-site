@@ -6,6 +6,12 @@ COLOUR + TYPE: arang #1e1e1e + krem (warna logo); aksen rubrik: Update biru tint
 Newsreader untuk judul & isi artikel, Figtree untuk antarmuka.
 Rasio foto mengikuti editor: kartu 4:3, foto artikel 16:10.
 */
+/* font lokal (OFL), varian variable: tanpa request ke Google Fonts */
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/newsreader-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/newsreader-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Newsreader";font-style:italic;font-weight:200 800;font-display:swap;src:url(fonts/newsreader-latin-wght-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(fonts/figtree-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url(fonts/figtree-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 :root{
   --bg:#f4f1ea;--paper:#fbf9f4;--ink:#1e1e1e;--ink2:#3a3833;--mute:#6b6862;--line:#dcd6ca;--line2:#e8e3d8;
   --cream:#f1ede4;--accent:#2f4bff;--up:#2f4bff;--op:#b4400b;--fe:#0f6b63;
@@ -182,6 +188,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.1;margin:0;lette
 .ls-hd h1{font-size:clamp(38px,5.4vw,64px)}
 .ls-hd h1 span{color:var(--mute);font-size:.5em}
 .ls-l{font-size:18px;color:var(--ink2);max-width:62ch;margin:14px 0 0}
+.ls-n{display:block;margin-top:8px;font-size:15px;color:var(--mute)}
 .pg{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-weight:600;font-size:15px}
 .pg a,.pg span{text-decoration:none}
 .pg .off{color:var(--line)}

@@ -39,6 +39,15 @@ const TOPIK = {
   kultur: { nama: "Kultur", h1: "Kultur & Gaya Hidup", title: "Kultur Pop & Gaya Hidup",
     desc: "Tren kultur pop, gaya hidup, dan pikiran-pikiran soal hidup sehari-hari dari Antarala." }
 };
+// pengantar halaman tag (opsional): slug tag -> teks. Isi hanya dengan fakta yang pasti.
+const TAG_INFO = {
+  "hindia": "Hindia adalah proyek solo Baskara Putra. Lagunya, “Rumah ke Rumah”, tercatat sebagai lagu Indonesia paling banyak di-stream di Spotify, dan album <i>Menari dengan Bayangan</i> sempat memecahkan rekor streaming album Indonesia. Di sini kamu bisa baca kabar rilisan dan kolaborasi terbarunya, termasuk “Sampaikan ke Kawan” bersama Lafa Pratomo dan Banda Neira.",
+  "lafa-pratomo": "Lafa Pratomo merilis EP <i>Garis Tegak</i> yang berisi kolaborasi dengan banyak musisi, di antaranya “terabas” bersama Bilal Indrajaya dan The Jansen, serta “Sampaikan ke Kawan” bersama Hindia dan Banda Neira. Semua tulisan Antarala soal Lafa Pratomo ada di halaman ini.",
+  "bilal-indrajaya": "Bilal Indrajaya adalah penyanyi dan penulis lagu. Selain bersolo karier, ia bermain di band Portura bersama Iga Massardi, dan berkolaborasi di “Kau” bersama Maudy Ayunda serta “terabas” bersama Lafa Pratomo dan The Jansen.",
+  "rilisan-baru": "Kabar single, EP, dan album baru dari musisi Indonesia, dirangkum Redaksi Antarala setiap hari lengkap dengan cerita di balik lagunya.",
+  "konser": "Kabar konser musik di Indonesia: jadwal, lineup, harga tiket, sampai cerita dari depan panggung.",
+  "industri-musik": "Tulisan soal perubahan industri musik Indonesia: dari era kaset ke streaming, royalti, sampai musik buatan AI."
+};
 // bio penulis (opsional). Isi di sini kalau ada.
 const REDAKSI = { pemred: "Essam Setiawan", editor: "Syilfa Adistya" };
 const AUTHORS = {
@@ -166,8 +175,8 @@ ${articleMeta}<meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="${A}img/apple-touch-icon.png">
 <link rel="manifest" href="${root}site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Antarala" href="${SITE}feed.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="preload" href="${A}fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${A}fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${A}style.css?v=${VER}">
 ${head}${graph}
 ${opts.ga ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${opts.ga}"></script>
@@ -291,8 +300,8 @@ ${ft.length ? sec("Feature", "feature.html", "Semua feature", `<div class="g3">$
     const ok = tagIndexable(t.slug);
     const related = [...new Set(t.items.flatMap(a => tagsOf(a).map(slugify)))].filter(s => s !== t.slug && tagIndexable(s)).slice(0, 10);
     listPages(`tag/${t.slug}`, t.items, { title: `${t.nama}: Berita, Lagu, dan Opini Terbaru`, h1: t.nama, kicker: "Tag",
-      desc: `Kumpulan tulisan Antarala soal ${t.nama}: kabar terbaru, rilisan, dan opini. ${t.items.length} tulisan.`,
-      lede: `${t.items.length} tulisan soal ${e(t.nama)} di Antarala, dari yang terbaru.`, noindex: !ok, crumb: [["Tag", SITE + "cari.html"]],
+      desc: TAG_INFO[t.slug] ? strip(TAG_INFO[t.slug]).slice(0, 155).replace(/\s+\S*$/, "") + "…" : `Kumpulan tulisan Antarala soal ${t.nama}: kabar terbaru, rilisan, dan opini. ${t.items.length} tulisan.`,
+      lede: TAG_INFO[t.slug] ? `${TAG_INFO[t.slug]} <span class="ls-n">${t.items.length} tulisan, dari yang terbaru.</span>` : `${t.items.length} tulisan soal ${e(t.nama)} di Antarala, dari yang terbaru.`, noindex: !ok, crumb: [["Tag", SITE + "cari.html"]],
       extraTop: related.length ? `<div class="chips chips-s">${related.map(s => `<a href="${s}.html">${e(TAGS.get(s).nama)}</a>`).join("")}</div>` : "" });
   }
   for (const au of AUTH.values()) {

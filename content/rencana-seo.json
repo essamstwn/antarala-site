@@ -15,7 +15,9 @@
    "kategori": "Feature",
    "topik": "konser",
    "tag": "Konser, Jadwal Konser",
-   "status": "rencana"
+   "status": "terbit",
+   "slug": "jadwal-konser-desember-2026-indonesia",
+   "terbit": "2026-11-28"
   },
   {
    "id": 2,
@@ -31,7 +33,9 @@
    "kategori": "Feature",
    "topik": "konser",
    "tag": "BTS, Konser",
-   "status": "rencana"
+   "status": "terbit",
+   "slug": "konser-bts-jakarta-2026-gbk-tiket",
+   "terbit": "2026-11-28"
   },
   {
    "id": 3,
@@ -95,7 +99,8 @@
    "kategori": "Feature",
    "topik": "konser",
    "tag": "DWP, Festival, Konser",
-   "status": "rencana"
+   "status": "rencana",
+   "catatan": "Cek 28/11: detikPop & inimusik (Nov 2026) menulis DWP 11–13 Des di JIExpo, tapi VOI (pengumuman Mei) menulis 2–4 Okt 2026. Pastikan ke dwpfest.com/Ismaya Live sebelum menulis; kalau sudah lewat (Okt), ganti sudut atau lewati."
   },
   {
    "id": 7,

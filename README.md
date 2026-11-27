@@ -4,6 +4,7 @@ Website statis Antarala. Isinya dibangun dari `content/` jadi HTML siap tayang d
 
 - `content/artikel.json` — artikel Opini & Feature (urutan = urutan di website; 3 teratas jadi sorotan beranda)
 - `content/berita/<slug>.json` — satu file per update/berita (urut otomatis berdasarkan tanggal + jam)
+- `content/taksonomi.json` — cadangan topik/tag/judulSeo per slug; dipakai build kalau data dari editor belum punya field itu
 - `static/` — CSS, logo, favicon, foto cover (`static/assets/img/cover-<slug>.jpg`), `.htaccess`, `brief.html`, `kol.html`
 - `tools/gen.js` — generator halaman (dipakai juga oleh Antarala Editor; kalau diubah, salin juga ke file `gen.js` di artifact editor)
 - `tools/build.mjs` — build: `node tools/build.mjs` (butuh Node 18+ dan Python 3 + Pillow untuk cover otomatis & WebP)

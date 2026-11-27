@@ -23,6 +23,10 @@ const B = fs.readdirSync(bDir).filter(f => f.endsWith(".json"))
   .filter(b => b && b.slug)
   .sort((a, b) => ((b.tanggal || "") + (b.jam || "")).localeCompare((a.tanggal || "") + (a.jam || "")));
 
+// cadangan topik/tag/judulSeo/poin: dipakai kalau data dari editor belum punya field itu
+const TAX = fs.existsSync(P("content/taksonomi.json")) ? JSON.parse(fs.readFileSync(P("content/taksonomi.json"), "utf8")) : {};
+for (const a of A.concat(B)) for (const [k, v] of Object.entries(TAX[a.slug] || {})) if (a[k] === undefined || a[k] === "" || (Array.isArray(a[k]) && !a[k].length)) a[k] = v;
+
 const all = A.concat(B);
 const slugs = new Set();
 for (const a of all) { if (slugs.has(a.slug)) throw new Error("Slug dobel: " + a.slug); slugs.add(a.slug); }

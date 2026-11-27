@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1e1e1e">
+<title>Antarala Campaign Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: friendly, rapi, seperti intake sheet label musik — singkat dan jelas
+   IDEA: lembar brief rilisan / track sheet studio, tiap bagian = satu "side"
+   PICTURE: formnya sendiri, satu kolom tenang, header dengan nomor side
+   COLOUR and TYPE: krem Antarala, tinta hitam, aksen biru kobalt; Archivo + Inter
+   LAYOUT: header pendek, form 1 kolom max 760px, kirim ke Google Sheet lewat Apps Script */
+:root{color-scheme:light dark;
+--bg:light-dark(#f3ebdd,#14120f);--card:light-dark(#fffaf1,#1d1a16);--ink:light-dark(#161310,#f1e9db);
+--mute:light-dark(#6b6157,#a99d8f);--line:light-dark(#dcd0bd,#352f28);--acc:light-dark(#2438e8,#7c8cff);--accInk:#fff;
+--soft:light-dark(#e7ddcb,#26221d);--err:light-dark(#c0261b,#ff8a7f)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:760px;margin:0 auto}
+header.band{padding-bottom:12px}
+.brand{font:800 15px/1 Archivo,sans-serif;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.brand i{width:26px;height:26px;border-radius:50%;background:var(--ink);display:inline-grid;place-items:center}
+.brand i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--bg)}
+h1{font:800 clamp(32px,6vw,50px)/1.05 Archivo,sans-serif;margin:22px 0 12px;text-wrap:balance}
+.lede{color:var(--mute);max-width:60ch;margin:0}
+form{display:grid;gap:22px;padding-top:8px}
+fieldset{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:22px clamp(16px,3vw,28px) 26px;margin:0;display:grid;gap:18px}
+legend{padding:0}
+.side{display:flex;align-items:baseline;gap:12px;font:800 22px/1.2 Archivo,sans-serif}
+.side span{font:700 13px/1 Archivo,sans-serif;background:var(--ink);color:var(--bg);border-radius:99px;padding:6px 10px}
+.hint{color:var(--mute);font-size:14px;margin:-8px 0 0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px}
+label,.lab{display:grid;gap:6px;align-content:start;font-weight:600;font-size:15px}
+.rq::after{content:" *";color:var(--acc)}
+small{font-weight:400;color:var(--mute);font-size:13px}
+input,select,textarea{font:16px/1.4 Inter,sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;min-height:46px;width:100%}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus,.chip input:focus-visible+b,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;font-weight:500}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip b{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid var(--line);border-radius:99px;font-weight:500;cursor:pointer;background:var(--bg);transition:background .15s}
+.chip input:checked+b{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip b small{color:inherit;opacity:.7;margin-left:6px}
+.bad input,.bad select,.bad textarea,.bad .chips b{border-color:var(--err)}
+.msg{color:var(--err);font-size:13px;font-weight:500;display:none}.bad .msg{display:block}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+button{font:700 16px/1 Archivo,sans-serif;min-height:52px;padding:0 26px;border-radius:99px;border:0;cursor:pointer;background:var(--acc);color:var(--accInk)}
+button.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+button[disabled]{opacity:.55;cursor:wait}
+.note{color:var(--mute);font-size:14px}
+.done{display:none;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px}
+.done h2{font:800 30px/1.1 Archivo,sans-serif;margin:0 0 8px}
+.done.show{display:block}
+.alert{background:var(--soft);border-radius:12px;padding:14px 16px;font-size:15px;display:none}
+.alert.show{display:block}
+#inbox{display:none}#inbox.show{display:block}
+#inbox h2{font:800 30px/1.1 Archivo,sans-serif;margin:0 0 6px}
+.brief{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:12px}
+.brief summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+.brief summary::-webkit-details-marker{display:none}
+.brief .t{font:700 17px/1.3 Archivo,sans-serif}
+.brief .d{color:var(--mute);font-size:13px;white-space:nowrap}
+.brief .m{color:var(--mute);font-size:14px;grid-column:1/-1}
+.brief dl{margin:0;padding:0 18px 18px;display:grid;grid-template-columns:11em minmax(0,1fr);gap:6px 14px;font-size:14px}
+.brief dt{color:var(--mute)}.brief dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.brief .acts{padding:0 18px 18px;display:flex;gap:10px;flex-wrap:wrap}
+.brief .acts button{min-height:44px;font-size:14px;padding:0 18px}
+footer{color:var(--mute);font-size:13px;text-align:center;padding-bottom:40px}
+@media(max-width:600px){.brief dl{grid-template-columns:1fr}.brief dt{margin-top:6px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="band"><div class="wrap">
+  <div class="brand"><i></i>ANTARALA</div>
+  <h1>Kirim brief rilisan barumu</h1>
+  <p class="lede">Isi sekali, tim Antarala langsung bikin rekomendasi campaign: KOL, creator lyrics, ads, placement sampai clippers. Sekitar 7 menit. Tanda * wajib diisi.</p>
+</div></header>
+
+<main class="band" style="padding-top:12px"><div class="wrap">
+<div class="alert" id="fail">Brief belum terkirim, mungkin koneksi sedang bermasalah. Coba kirim lagi, atau klik <b>Salin brief</b> lalu kirim teksnya ke tim Antarala lewat WhatsApp.</div>
+
+<form id="f" novalidate>
+<fieldset>
+  <legend class="side"><span>Side A</span>Tentang artis</legend>
+  <div class="row">
+    <label class="req">Nama band / artis<input name="artis" autocomplete="organization"><em class="msg">Wajib diisi</em></label>
+    <label class="req">Genre<input name="genre" placeholder="Indie pop, rock, dangdut…"><em class="msg">Wajib diisi</em></label>
+  </div>
+  <div class="row">
+    <label>Label / manajemen<input name="label"></label>
+    <label class="req">Nama PIC<input name="pic" autocomplete="name"><em class="msg">Wajib diisi</em></label>
+  </div>
+  <div class="row">
+    <label class="req">WhatsApp PIC<input name="wa" type="tel" inputmode="tel" placeholder="08…" autocomplete="tel"><em class="msg">Wajib diisi</em></label>
+    <label class="req">Email PIC<input name="email" type="email" autocomplete="email"><em class="msg">Isi email yang valid</em></label>
+  </div>
+  <div class="row">
+    <label>Instagram artis<input name="ig" placeholder="@"></label>
+    <label>TikTok artis<input name="tt" placeholder="@"></label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend class="side"><span>Side B</span>Rilisan</legend>
+  <div class="row">
+    <label class="req">Nama rilisan<input name="rilisan"><em class="msg">Wajib diisi</em></label>
+    <label>Tipe rilisan<select name="tipe"><option>Single</option><option>EP</option><option>Album</option><option>Re-release / versi baru</option></select></label>
+  </div>
+  <div class="row">
+    <label class="req">Tanggal rilis<input name="tglRilis" type="date"><em class="msg">Wajib diisi</em></label>
+    <label class="req">Link sound TikTok<small>Sound yang dipakai KOL saat posting</small><input name="linkTiktok" type="url" placeholder="https://www.tiktok.com/music/…"><em class="msg">Isi link sound TikTok atau audio Instagram</em></label>
+  </div>
+  <div class="row">
+    <label class="req">Link audio Instagram<small>Audio Reels untuk tap-in lagu</small><input name="linkIg" type="url" placeholder="https://www.instagram.com/reels/audio/…"><em class="msg">Isi link audio Instagram atau sound TikTok</em></label>
+    <label>Link Spotify / YouTube<input name="linkDsp" type="url" placeholder="https://"></label>
+  </div>
+  <p class="hint" style="margin-top:-6px">Minimal isi salah satu: sound TikTok atau audio Instagram, sesuai platform campaign.</p>
+  <div class="row">
+    <label>Bagian lagu yang mau diangkat<small>Contoh: 0:45–1:05 (reff)</small><input name="potongan"></label>
+    <label>Mood / vibe lagu<input name="mood" placeholder="Galau, hype, romantis…"></label>
+  </div>
+  <label>Cerita singkat di balik lagu<small>Bahan angle konten untuk creator</small><textarea name="cerita"></textarea></label>
+</fieldset>
+
+<fieldset>
+  <legend class="side"><span>Side C</span>Campaign</legend>
+  <label class="req">Nama campaign<input name="campaign"><em class="msg">Wajib diisi</em></label>
+  <div class="lab req" data-group="objective">Objective<small>Boleh pilih lebih dari satu</small>
+    <div class="chips" id="objective"></div><em class="msg">Pilih minimal satu</em></div>
+  <label>Detail objective / KPI target<small>Contoh: 500 video UGC, 5 juta views, naik 50rb monthly listeners</small><textarea name="kpi"></textarea></label>
+  <label class="req">Target audience<small>Usia, kota, minat, siapa pendengar idealnya</small><textarea name="audience"></textarea><em class="msg">Wajib diisi</em></label>
+  <label>Key message<small>Satu hal yang harus diingat orang setelah lihat konten</small><input name="keyMessage"></label>
+  <div class="lab req" data-group="platform">Platform<div class="chips" id="platform"></div><em class="msg">Pilih minimal satu</em></div>
+  <div class="lab req" data-group="medium">Medium<div class="chips" id="medium"></div><em class="msg">Pilih minimal satu</em></div>
+  <div class="row">
+    <label class="req">Budget campaign<small>Total budget dalam Rupiah</small><input name="budget" inputmode="numeric" autocomplete="off" placeholder="Rp 25.000.000"><em class="msg">Isi angka budget</em></label>
+    <span></span>
+  </div>
+  <div class="row">
+    <label class="req">Mulai campaign<input name="mulai" type="date"><em class="msg">Wajib diisi</em></label>
+    <label class="req">Selesai campaign<input name="selesai" type="date"><em class="msg">Harus setelah tanggal mulai</em></label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend class="side"><span>Side D</span>Arahan &amp; aset</legend>
+  <label>Referensi konten / campaign yang disukai<small>Link TikTok, IG, atau nama artis lain</small><textarea name="referensi"></textarea></label>
+  <label>Do's &amp; don'ts<small>Contoh: jangan pakai konten joget, tidak boleh KOL yang terafiliasi brand rokok</small><textarea name="dosdonts"></textarea></label>
+  <div class="lab">Aset yang tersedia<div class="chips" id="aset"></div></div>
+  <label>Link folder aset<small>Google Drive / Dropbox</small><input name="linkAset" type="url" placeholder="https://"></label>
+  <label>Preferensi KOL / creator<small>Nama atau tipe creator yang diinginkan, kalau ada</small><textarea name="prefKol"></textarea></label>
+  <label>Catatan lain<textarea name="catatan"></textarea></label>
+</fieldset>
+
+<fieldset>
+  <legend class="side"><span>Side E</span>Info penagihan</legend>
+  <p class="hint" style="margin-top:0">Opsional, membantu kami menyiapkan dokumen dari awal.</p>
+  <div class="row">
+    <label>Tagihan atas nama<select name="tagihanAtas"><option value="">Pilih</option><option>Pribadi</option><option>Band</option><option>Label / manajemen</option><option>PT / perusahaan</option></select></label>
+    <label>Nama di invoice<small>Nama orang / band / perusahaan</small><input name="namaTagihan"></label>
+  </div>
+  <label>Perlu PO atau faktur pajak?<select name="dokTagihan"><option value="">Pilih</option><option>Tidak perlu</option><option>Perlu PO</option><option>Perlu faktur pajak</option><option>Perlu PO dan faktur pajak</option></select></label>
+</fieldset>
+
+<div class="actions">
+  <button type="submit" id="send">Kirim brief</button>
+  <button type="button" class="ghost" id="copy">Salin brief</button>
+  <span class="note" id="status">Isian tersimpan otomatis di browser ini.</span>
+</div>
+</form>
+
+<section class="done" id="done">
+  <h2>Brief terkirim. Makasih!</h2>
+  <p>Tim Antarala akan menghubungi PIC lewat WhatsApp dalam 1–2 hari kerja dengan rekomendasi campaign.</p>
+  <div class="actions"><button type="button" class="ghost" id="again">Kirim brief lain</button></div>
+</section>
+
+</div></main>
+<footer><a href="/" style="color:inherit">Kembali ke Antarala</a></footer>
+
+<script>
+{
+// Tempel URL Web App Apps Script di sini (berakhiran /exec)
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbyDupknqqt233V2h3b5vAFmtgqU_AgO-ByQ6ehxpVVeQa6F1McI0ffjwhMYBiOGOpNo/exec';
+const OPT={
+  objective:["Awareness rilisan","Sound viral / UGC","Naik streaming","Follower & fanbase","Promo konser / tiket","Lainnya"],
+  platform:["TikTok","Instagram","YouTube Shorts","Spotify","X / Twitter","Lainnya"],
+  medium:[["KOL","influencer"],["Creator lyrics","video lirik"],["Ads","paid media"],["Placement","playlist / media"],["Clippers","akun clipper"]],
+  aset:["Video klip","Behind the scene","Lirik final","Instrumental / stems","Foto press","Artis bisa collab / duet"]
+};
+const LABELS={artis:"Artis",genre:"Genre",label:"Label / manajemen",pic:"PIC",wa:"WhatsApp",email:"Email",ig:"Instagram",tt:"TikTok",
+  rilisan:"Rilisan",tipe:"Tipe",tglRilis:"Tanggal rilis",linkTiktok:"Sound TikTok",linkIg:"Audio Instagram",linkDsp:"Link Spotify/YouTube",potongan:"Bagian lagu",mood:"Mood",cerita:"Cerita lagu",
+  campaign:"Nama campaign",objective:"Objective",kpi:"KPI target",audience:"Target audience",keyMessage:"Key message",platform:"Platform",medium:"Medium",
+  budget:"Budget",mulai:"Mulai",selesai:"Selesai",referensi:"Referensi",dosdonts:"Do's & don'ts",aset:"Aset tersedia",linkAset:"Link aset",prefKol:"Preferensi KOL",catatan:"Catatan",tagihanAtas:"Tagihan atas nama",namaTagihan:"Nama di invoice",dokTagihan:"PO / faktur pajak"};
+const GROUPS=["objective","platform","medium","aset"];
+const REQ=["artis","genre","pic","wa","email","rilisan","tglRilis","campaign","audience","budget","mulai","selesai"];
+const f=document.getElementById('f'),$=id=>document.getElementById(id);
+for(const l of document.querySelectorAll('.req')){const t=l.firstChild;if(t&&t.nodeType===3){const sp=document.createElement('span');sp.className='rq';sp.textContent=t.textContent;l.replaceChild(sp,t)}}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+for(const g of GROUPS){
+  $(g).innerHTML=OPT[g].map(o=>{const [v,s]=Array.isArray(o)?o:[o];
+    return `<label class="chip"><input type="checkbox" name="${g}" value="${esc(v)}"><b>${esc(v)}${s?`<small>${esc(s)}</small>`:''}</b></label>`}).join('');
+}
+
+const bIn=f.elements.budget;
+const fmtRp=v=>{const n=String(v).replace(/\D/g,'').replace(/^0+/,'');return n?'Rp '+n.replace(/\B(?=(\d{3})+(?!\d))/g,'.'):''};
+bIn.addEventListener('input',()=>{bIn.value=fmtRp(bIn.value)});
+const read=()=>{const d={};
+  for(const el of f.elements){if(!el.name)continue;
+    if(el.type==='checkbox'){(d[el.name]=d[el.name]||[]);if(el.checked)d[el.name].push(el.value)}
+    else d[el.name]=el.value.trim()}
+  for(const g of GROUPS)d[g]=d[g]||[];return d};
+const fill=d=>{for(const el of f.elements){if(!el.name||!(el.name in d))continue;
+  if(el.type==='checkbox')el.checked=(d[el.name]||[]).includes(el.value);else el.value=d[el.name]}};
+
+const KEY='antarala-brief-draft';
+try{const s=localStorage.getItem(KEY);if(s)fill(JSON.parse(s))}catch(e){}
+let tm;f.addEventListener('input',e=>{clearTimeout(tm);tm=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(read()))}catch(e){}},400);
+  const w=e.target.closest('label,.lab');if(w)w.classList.remove('bad');if(e.target.type==='checkbox')e.target.closest('.lab')?.classList.remove('bad')});
+
+const validate=d=>{let first=null;f.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));
+  const mark=w=>{w.classList.add('bad');first=first||w};
+  for(const k of REQ){const el=f.elements[k];let ok=!!d[k];
+    if(ok&&el.type==='email')ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d[k]);
+    if(ok&&el.type==='url')ok=/^https:\/\/\S+$/.test(d[k]);
+    if(ok&&k==='budget')ok=/\d/.test(d.budget)&&+d.budget.replace(/\D/g,'')>0;
+    if(ok&&k==='selesai'&&d.mulai)ok=d.selesai>=d.mulai;
+    if(!ok)mark(el.closest('label'))}
+  if(!d.linkTiktok&&!d.linkIg){mark(f.elements.linkTiktok.closest('label'));mark(f.elements.linkIg.closest('label'))}
+  for(const el of f.querySelectorAll('input[type=url]')){const v=el.value.trim();if(v&&!/^https:\/\/\S+$/.test(v))mark(el.closest('label'))}
+  for(const g of ["objective","platform","medium"])if(!d[g].length)mark(f.querySelector(`[data-group=${g}]`));
+  if(first){first.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'});first.querySelector('input,select,textarea')?.focus({preventScroll:true})}
+  return !first};
+
+const toText=d=>{const order=Object.keys(LABELS);
+  return "BRIEF CAMPAIGN ANTARALA\n\n"+order.filter(k=>Array.isArray(d[k])?d[k].length:d[k]).map(k=>`${LABELS[k]}: ${Array.isArray(d[k])?d[k].join(', '):d[k]}`).join('\n')};
+
+const copyText=async(t,btn)=>{const old=btn.textContent;try{await navigator.clipboard.writeText(t);btn.textContent='Tersalin'}catch(e){btn.textContent='Gagal menyalin'}setTimeout(()=>btn.textContent=old,1800)};
+$('copy').addEventListener('click',e=>copyText(toText(read()),e.currentTarget));
+
+f.addEventListener('submit',async e=>{e.preventDefault();const d=read();if(!validate(d))return;
+  const b=$('send');b.disabled=true;b.textContent='Mengirim…';$('status').textContent='';$('fail').classList.remove('show');
+  const payload={...d,createdAt:new Date().toISOString()};
+  for(const g of GROUPS)payload[g]=d[g].join(', ');
+  try{
+    if(!SCRIPT_URL.startsWith('https://script.google.com/'))throw new Error('no-url');
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    try{localStorage.removeItem(KEY)}catch(e){}
+    f.reset();f.style.display='none';$('done').classList.add('show');$('done').scrollIntoView({block:'start'});
+  }catch(err){$('fail').classList.add('show');$('status').textContent='Belum terkirim.';$('fail').scrollIntoView({block:'center'})}
+  b.disabled=false;b.textContent='Kirim brief'});
+$('again').addEventListener('click',()=>{$('done').classList.remove('show');f.style.display='';window.scrollTo(0,0)});
+}
+</script>
+</body>
+</html>

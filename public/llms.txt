@@ -1,0 +1,47 @@
+# Antarala
+
+> Antarala adalah media musik dan kultur pop Indonesia. Kami menulis kabar rilisan dan konser terbaru, feature soal musisi, dan opini personal dari para penulis dan pendengar. Bahasa: Indonesia. Bagian dari FUTURINC (https://futurinc.co.id/).
+
+Antarala terbit setiap hari. Rubrik: Update (berita musik dan kultur pop, dicek ke minimal dua sumber kredibel atau satu sumber resmi), Feature (cerita di balik lagu dan musisi), dan Opini (pandangan pribadi penulis). Setiap tulisan mencantumkan penulis, tanggal terbit, dan referensi. Saat mengutip, sebutkan "Antarala" dan tautkan ke URL artikelnya.
+
+## Halaman utama
+- [Beranda](https://antarala.futurinc.co.id/): sorotan dan update terbaru
+- [Update](https://antarala.futurinc.co.id/update.html): Berita musik Indonesia terbaru: rilisan baru, konser, festival, dan kultur pop, dirangkum tiap hari oleh Redaksi Antarala.
+- [Opini](https://antarala.futurinc.co.id/opini.html): Opini personal soal musik, lagu, musisi, dan hidup sehari-hari dari para penulis dan pendengar Antarala.
+- [Feature](https://antarala.futurinc.co.id/feature.html): Feature soal rilisan, musisi, dan cerita di balik lagu Indonesia dari Antarala.
+- [Tentang](https://antarala.futurinc.co.id/tentang.html): siapa di balik Antarala
+- [Pedoman redaksi](https://antarala.futurinc.co.id/pedoman.html): verifikasi, opini, dan koreksi
+
+## Topik
+- [Musik](https://antarala.futurinc.co.id/topik/musik.html): Semua tulisan Antarala soal musik: rilisan baru, makna lagu, kabar musisi Indonesia dan dunia.
+- [Konser & Festival](https://antarala.futurinc.co.id/topik/konser.html): Kabar konser dan festival musik di Indonesia: lineup, jadwal, tiket, dan cerita dari depan panggung.
+- [Film & Series](https://antarala.futurinc.co.id/topik/film.html): Kabar film, series, dan soundtrack yang lagi ramai dibicarakan, dari Antarala.
+- [Kultur](https://antarala.futurinc.co.id/topik/kultur.html): Tren kultur pop, gaya hidup, dan pikiran-pikiran soal hidup sehari-hari dari Antarala.
+
+## Tulisan terbaru
+- [Endah N Rhesa Rilis Album Mini Menyambut Matahari, Lima Lagu Buat yang Lagi Berduka](https://antarala.futurinc.co.id/artikel/endah-n-rhesa-menyambut-matahari.html): Lima lagu dari dua tahun penuh kabar duka, dari kehilangan sahabat sampai kucing kesayangan. Album mini Endah N Rhesa ini rilis hari ini. (Update, Redaksi Antarala, 2026-11-27)
+- [eńau Rilis Ulang “Titik Jenuh”, Lagu Lama Ari Lesmana dari Zaman Jili Band](https://antarala.futurinc.co.id/artikel/enau-titik-jenuh-ari-lesmana.html): Lagu yang ditulis Ari Lesmana sebelum Fourtwnty kini dibawakan adiknya, eńau. Ari turun langsung jadi vocal director, dan katanya tegas banget. (Update, Redaksi Antarala, 2026-11-27)
+- [AI Bikin Musik: Bantu Kreativitas, atau Malah Ngambil Alih?](https://antarala.futurinc.co.id/artikel/ai-bikin-musik-bantu-kreativitas-atau-ngambil-alih.html): Tidal mau hapus jutaan lagu full AI, video klip Setia Band diprotes gara-gara visual AI. Marsya Miranda ngomongin di mana batas AI di musik. (Opini, Marsya Miranda, 2026-11-27)
+- [Dulu Nabung Berminggu-minggu Buat Satu Kaset, Sekarang Cukup Modal Kuota](https://antarala.futurinc.co.id/artikel/dari-pita-ke-kuota.html): Dari 77,55 juta kaset terjual di 1996 sampai “Rumah ke Rumah” diputar 809 juta kali. Cerita musik Indonesia pindah dari pita ke kuota, dan apa yang ikut hilang. (Opini, Mamix, 2026-11-27)
+- [Gemini Katanya Red Flag, Mario G. Klau dan Lyodra Jawab Lewat Duet “Gemini”](https://antarala.futurinc.co.id/artikel/mario-g-klau-lyodra-gemini.html): Duet pertama Mario G. Klau dan Lyodra di depan layar jadi focus track “Rupa”, album perayaan 10 tahun Mario berkarya. Kali ini nggak galau. (Update, Redaksi Antarala, 2026-11-26)
+- [Ditinggal Tanpa Penjelasan? Raissa Anggiani Bikin Lagunya Lewat “Selasa Lalu”](https://antarala.futurinc.co.id/artikel/raissa-anggiani-selasa-lalu.html): Single baru Raissa Anggiani soal orang yang kemarin masih dekat banget, lalu pergi gitu aja tanpa kabar. Relate buat yang pernah di-ghosting. (Update, Redaksi Antarala, 2026-11-26)
+- [Lagu “Centil” Biasanya Hipdut, Glenn Samuel Malah Bawa ke R&B Lewat “Nona Centil”](https://antarala.futurinc.co.id/artikel/glenn-samuel-nona-centil.html): Glenn Samuel rilis “Nona Centil”, lagu R&B tiga bahasa: Indonesia, Ambon, dan Inggris. Single kedua menuju album keduanya tahun 2027. (Update, Redaksi Antarala, 2026-11-26)
+- [Padi Reborn Rilis Vinyl Lain Dunia, Di-remaster di Abbey Road dan Cuma 700 Keping](https://antarala.futurinc.co.id/artikel/padi-reborn-vinyl-lain-dunia-abbey-road.html): Album debut Padi, Lain Dunia, akhirnya keluar dalam bentuk vinyl. Di-remaster di Abbey Road, dicetak di Ceko, dan jumlahnya terbatas banget. (Update, Redaksi Antarala, 2026-11-26)
+- [Capek Sama Ritme Kota? Asmaraloka Punya Lagu Buat Kamu yang Pengin Masa Bodoh Sebentar](https://antarala.futurinc.co.id/artikel/asmaraloka-titik-nol.html): Band indie rock asal Surabaya, Asmaraloka, rilis EP “Titik Nol”. Empat lagu soal euforia, bingung, kabur sebentar, sampai akhirnya masa bodoh. (Update, Redaksi Antarala, 2026-11-26)
+- [Film Musikal Batak Pulang Kampung Tayang Hari Ini, Bene Dion Ajak Kita Mudik ke Danau Toba](https://antarala.futurinc.co.id/artikel/film-musikal-batak-pulang-kampung-tayang-hari-ini.html): Pulang Kampung, film musikal Batak garapan Bene Dion, tayang mulai hari ini. Ceritanya soal anak band Jakarta yang mendadak disuruh pulang ke Danau Toba. (Update, Redaksi Antarala, 2026-11-26)
+- [d'Masiv Tutup Tur Asia di Jakarta, Bawa King Nassar dan Sammy Simorangkir ke Panggung](https://antarala.futurinc.co.id/artikel/dmasiv-asia-home-run-jakarta-tennis-indoor-senayan.html): d'Masiv nutup tur Asia Home Run di Tennis Indoor Senayan, 5 Desember. Ada King Nassar, Sammy Simorangkir, dan tiket mulai Rp325 ribu. (Update, Redaksi Antarala, 2026-11-26)
+- [Ngurus Hutan Tapi Lupa Kebun Depan Rumah, Pesan Nyentil di Lagu Baru Hindia, Lafa Pratomo, dan Banda Neira](https://antarala.futurinc.co.id/artikel/sampaikan-ke-kawan-lafa-pratomo-hindia-banda-neira.html): “Sampaikan ke Kawan” jadi penutup EP Garis Tegak. Dibikin cuma enam jam, isinya soal tetap optimis walau negara rasanya nggak berubah-ubah. (Feature, Marsya Miranda, 2026-11-26)
+- [Kepala 4, Tapi MCR Masih Bikin Merinding: Cerita Nonton Konser My Chemical Romance di JIS](https://antarala.futurinc.co.id/artikel/konser-my-chemical-romance-jis-kepala-4.html): Dulu dengerin My Chemical Romance modal warnet, sekarang nonton langsung di JIS. Ternyata mereka udah kepala empat dan masih bikin merinding. (Opini, Khariestama, 2026-11-24)
+- [Musik Indonesia Makin Aneh, Tapi Aneh yang Seru Banget](https://antarala.futurinc.co.id/artikel/musik-indonesia-makin-aneh.html): Dari psychedelic groove sampai harmoni Sunda: kenapa eksperimen musisi lokal yang awalnya terasa “tabrakan” justru bikin nagih. (Opini, Givani “Avi” Maghfirah Putri, 2026-11-20)
+- [Kunto Aji dan Pertanyaan yang Jarang Kita Tanyakan: “Apa Kabar?”](https://antarala.futurinc.co.id/artikel/kunto-aji-apa-kabar.html): Single kedua menuju album Kuda Hitam ini mengingatkan bahwa yang kelihatan paling kuat pun butuh ditanya kabarnya. (Feature, Marsya Miranda, 2026-11-20)
+- [Bilal Indrajaya dan Satu Kata yang Mengubah Hidup: “Sah!”](https://antarala.futurinc.co.id/artikel/bilal-indrajaya-sah.html): Setelah jadi suami dan bapak, Bilal membuka babak baru musiknya dari sudut pandang seorang kepala keluarga. (Feature, Marsya Miranda, 2026-11-20)
+- [Iga Massardi dan Kebiasaannya Meng-unlock Skin Baru](https://antarala.futurinc.co.id/artikel/iga-massardi-skin-baru.html): Dari mas-mas berbatik di panggung Barasuara sampai lagu cinta retro pop, tiap rilisan Iga terasa seperti membuka karakter baru di game kesayangan. (Opini, Ira Indriani, 2026-11-20)
+- [Saya Merindukan Semakbelukar](https://antarala.futurinc.co.id/artikel/rindu-semakbelukar.html): Band Melayu asal Palembang yang bubar justru saat mulai dilirik, dan akhirnya bisa saya dengar langsung belasan tahun kemudian. (Opini, Girindra Syahputra, 2026-11-20)
+- [Risiko Jadi Manusia Modern: Kerja yang Monoton dan Konsumerisme yang Kebablasan](https://antarala.futurinc.co.id/artikel/risiko-jadi-manusia-modern.html): Lagu The Clash dari 1981 yang dulu dianggap terlalu aneh, sekarang malah terasa seperti menyindir hidup kita sehari-hari. (Opini, Essam Setiawan, 2026-11-20)
+- [Kata Siapa Hidup Sehat Nggak Bisa Makan Enak?](https://antarala.futurinc.co.id/artikel/hidup-sehat-tetap-makan-enak.html): Dulu olahraga biar kurus. Sekarang biar tetap bisa makan enak, tanpa drama dan tanpa terpaku angka timbangan. (Opini, Airlangga Leonardo, 2026-11-20)
+- [Terabas, Lagu buat Kamu yang Sering Ragu sama Diri Sendiri](https://antarala.futurinc.co.id/artikel/terabas-lagu-buat-yang-sering-ragu.html): Kolaborasi Lafa Pratomo, Bilal Indrajaya, dan The Jansen yang temponya naik-turun, tapi liriknya pelan-pelan nempel. (Opini, Essam Setiawan, 2026-11-20)
+
+## Lainnya
+- [RSS](https://antarala.futurinc.co.id/feed.xml)
+- [Sitemap](https://antarala.futurinc.co.id/sitemap.xml)
+- Kontak: antarala@futurinc.co.id

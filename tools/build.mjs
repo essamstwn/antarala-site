@@ -27,7 +27,7 @@ const all = A.concat(B);
 const slugs = new Set();
 for (const a of all) { if (slugs.has(a.slug)) throw new Error("Slug dobel: " + a.slug); slugs.add(a.slug); }
 const list = all.map(({ _baru, coverAsset, autoCover, ...a }) => a);
-const files = Gen.build(list, { ga: "G-LDF85G4VRG" });
+const files = Gen.build(list, { ga: "G-LDF85G4VRG", webp: true });
 
 fs.rmSync(OUT, { recursive: true, force: true });
 const write = (rel, data) => { const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, data); };
@@ -47,4 +47,7 @@ for (const a of all) {
   else if (!fs.existsSync(f)) missing.push(a.cover);
 }
 if (missing.length) { console.error("Cover tidak ditemukan di static/assets/img:", missing.join(", ")); process.exit(1); }
+
+// versi WebP (lebih ringan) untuk semua cover
+execFileSync("python3", [P("tools/webp.py"), img], { stdio: "inherit" });
 console.log(`OK: ${A.length} artikel, ${B.length} berita, ${Object.keys(files).length} file halaman.`);

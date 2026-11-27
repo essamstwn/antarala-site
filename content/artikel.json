@@ -79,7 +79,10 @@
     "TechCrunch, “Tidal cracks down on AI music by cutting off monetization” (2026)",
     "https://techcrunch.com/2026/06/29/tidal-cracks-down-on-ai-music-by-cutting-off-monetization/"
    ]
-  ]
+  ],
+  "topik": "musik",
+  "tag": "AI, Industri Musik, Setia Band, Tidal",
+  "judulSeo": "AI di Musik: Bantu Kreativitas atau Ngambil Alih?"
  },
  {
   "slug": "dari-pita-ke-kuota",
@@ -196,7 +199,10 @@
    [
     "Spotify Loud & Clear Indonesia 2026"
    ]
-  ]
+  ],
+  "topik": "musik",
+  "tag": "Industri Musik, Kaset, Spotify, Hindia, Peterpan",
+  "judulSeo": "Dari Kaset ke Streaming: Perjalanan Musik Indonesia"
  },
  {
   "slug": "sampaikan-ke-kawan-lafa-pratomo-hindia-banda-neira",
@@ -280,7 +286,10 @@
    [
     "Siaran pers “Sampaikan ke Kawan” — Lafa Pratomo, Hindia, Banda Neira"
    ]
-  ]
+  ],
+  "topik": "musik",
+  "tag": "Hindia, Lafa Pratomo, Banda Neira, Rilisan Baru",
+  "judulSeo": "Sampaikan ke Kawan: Lagu Baru Hindia, Lafa Pratomo & Banda Neira"
  },
  {
   "slug": "konser-my-chemical-romance-jis-kepala-4",
@@ -370,7 +379,10 @@
     "Medcom, “Prediksi Setlist Konser My Chemical Romance Jakarta 2026 di JIS” (2026)",
     "https://www.medcom.id/hiburan/indis/PNg1Rd7k-prediksi-setlist-konser-my-chemical-romance-jakarta-2026-di-jis"
    ]
-  ]
+  ],
+  "topik": "konser",
+  "tag": "My Chemical Romance, Konser, JIS",
+  "judulSeo": "Nonton Konser My Chemical Romance di JIS: Masih Merinding"
  },
  {
   "slug": "musik-indonesia-makin-aneh",
@@ -440,7 +452,9 @@
     "JPNN, “Basajan Umumkan Japan Tour 2026, Bawa Bebunyian Priangan ke Negeri Sakura” (2026)",
     "https://www.jpnn.com/news/basajan-umumkan-japan-tour-2026-bawa-bebunyian-priangan-ke-negeri-sakura"
    ]
-  ]
+  ],
+  "topik": "musik",
+  "tag": "Musik Indie, Eksperimental"
  },
  {
   "slug": "kunto-aji-apa-kabar",
@@ -485,7 +499,10 @@
     "Jadi, habis dengar lagu ini, siapa teman lama yang mau kamu tanya kabarnya? Atau jangan-jangan, kamu sendiri yang belum sempat ditanya?"
    ]
   ],
-  "referensi": []
+  "referensi": [],
+  "topik": "musik",
+  "tag": "Kunto Aji, Rilisan Baru",
+  "judulSeo": "Makna Lagu “Apa Kabar?” Kunto Aji, Menuju Album Kuda Hitam"
  },
  {
   "slug": "bilal-indrajaya-sah",
@@ -527,7 +544,9 @@
     "Kalau kamu, momen apa yang bikin hidupmu terasa berubah selamanya?"
    ]
   ],
-  "referensi": []
+  "referensi": [],
+  "topik": "musik",
+  "tag": "Bilal Indrajaya, Rilisan Baru"
  },
  {
   "slug": "iga-massardi-skin-baru",
@@ -597,7 +616,9 @@
     "VOI, “Portura: New Music Units Membering Iga Massardi To Bilal Indrajaya”",
     "https://voi.id/en/musik/534796"
    ]
-  ]
+  ],
+  "topik": "musik",
+  "tag": "Iga Massardi, Barasuara"
  },
  {
   "slug": "rindu-semakbelukar",
@@ -645,7 +666,10 @@
     "Ditambah lagi, teriakan kritik sosial di “Seloka Beruk”, tentang adat dan budaya yang ternoda ketika yang memimpin tak pantas memimpin, menurut saya sangat mewakili kondisi saat ini. Lagu itu membuat saya semakin berapi-api menjalani hidup dengan nuansa yang ayuhai!"
    ]
   ],
-  "referensi": []
+  "referensi": [],
+  "topik": "musik",
+  "tag": "Semakbelukar, Musik Melayu",
+  "judulSeo": "Saya Merindukan Semakbelukar, Band Melayu dari Palembang"
  },
  {
   "slug": "risiko-jadi-manusia-modern",
@@ -735,7 +759,10 @@
     "Far Out Magazine, “How rap infiltrated The Clash song ‘The Magnificent Seven’”",
     "https://faroutmagazine.co.uk/rap-the-clash-the-magnificent-seven/"
    ]
-  ]
+  ],
+  "topik": "kultur",
+  "tag": "The Clash, Konsumerisme",
+  "judulSeo": "Lagu The Clash dan Risiko Jadi Manusia Modern"
  },
  {
   "slug": "hidup-sehat-tetap-makan-enak",
@@ -821,7 +848,9 @@
     "Semnani-Azad dkk., The BMJ (2025), via Harvard T.H. Chan School of Public Health",
     "https://hsph.harvard.edu/news/intermittent-fasting-may-be-effective-for-weight-loss-cardiometabolic-health"
    ]
-  ]
+  ],
+  "topik": "kultur",
+  "tag": "Gaya Hidup, Olahraga"
  },
  {
   "slug": "terabas-lagu-buat-yang-sering-ragu",
@@ -883,6 +912,9 @@
    [
     "Siaran pers terabas — Lafa Pratomo, Bilal Indrajaya, The Jansen"
    ]
-  ]
+  ],
+  "topik": "musik",
+  "tag": "Lafa Pratomo, Bilal Indrajaya, The Jansen, Rilisan Baru",
+  "judulSeo": "Terabas: Kolaborasi Lafa Pratomo, Bilal Indrajaya & The Jansen"
  }
 ]

@@ -1,6 +1,8 @@
 {
  "name": "Antarala",
  "short_name": "Antarala",
+ "description": "Ngomongin musik, kultur, pikiran, dan kabar yang menarik di antaranya.",
+ "lang": "id",
  "start_url": "/",
  "display": "standalone",
  "background_color": "#f4f1ea",

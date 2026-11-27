@@ -1,0 +1,291 @@
+{
+ "_panduan": "Rencana artikel SEO Antarala. Tugas harian menulis 2 artikel per hari dari item berstatus 'rencana' dengan jadwal <= hari ini (paling lama dulu), lalu mengubah status jadi 'terbit' + slug, atau 'lewati' + alasan. Kalau sisa item 'rencana' kurang dari 14, tambahkan item baru (riset kata kunci) sampai ±2 minggu ke depan, 2 per hari. Detail aturan ada di skill antarala-seo-konten dan README.",
+ "item": [
+  {
+   "id": 1,
+   "jadwal": "2026-11-28",
+   "judulKerja": "Jadwal konser Desember 2026 di Indonesia, dari BTS sampai DWP",
+   "kataKunci": "jadwal konser desember 2026",
+   "kataKunciTambahan": [
+    "konser desember 2026 jakarta",
+    "konser akhir tahun 2026"
+   ],
+   "niat": "informasional",
+   "sudut": "Daftar konser & festival Desember 2026 yang sudah resmi (tanggal, venue, tiket), plus tips memilih. Cek ulang tiap tanggal ke sumber resmi/promotor.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "Konser, Jadwal Konser",
+   "status": "rencana"
+  },
+  {
+   "id": 2,
+   "jadwal": "2026-11-28",
+   "judulKerja": "Konser BTS di Jakarta 2026: tanggal, venue, tiket, dan yang perlu disiapkan",
+   "kataKunci": "konser bts jakarta 2026",
+   "kataKunciTambahan": [
+    "tiket konser bts jakarta",
+    "bts gbk 2026"
+   ],
+   "niat": "informasional",
+   "sudut": "Sumber berbeda soal tanggal (26–27 vs 27–29 Desember): pakai hanya info resmi promotor/BigHit; sebutkan kalau ada perubahan.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "BTS, Konser",
+   "status": "rencana"
+  },
+  {
+   "id": 3,
+   "jadwal": "2026-11-29",
+   "judulKerja": "Daftar pemenang AMI Awards 2026 dan cerita di baliknya",
+   "kataKunci": "pemenang ami awards 2026",
+   "kataKunciTambahan": [
+    "ami awards 2026",
+    "album terbaik ami 2026"
+   ],
+   "niat": "informasional",
+   "sudut": "Rangkum kategori utama (Tulus, Idgitaf, no na, dst.) + 3–4 cerita menarik, bukan sekadar tabel.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "AMI Awards, Tulus, Idgitaf, no na",
+   "status": "rencana"
+  },
+  {
+   "id": 4,
+   "jadwal": "2026-11-29",
+   "judulKerja": "Kenapa “Berusaha di Bawah Hujan” Idgitaf menang Album Terbaik AMI 2026",
+   "kataKunci": "idgitaf berusaha di bawah hujan",
+   "kataKunciTambahan": [
+    "album idgitaf",
+    "idgitaf ami awards"
+   ],
+   "niat": "informasional",
+   "sudut": "Bahas album (warna country-pop), kemenangan AMI, dan lagu-lagu kunci. Tanpa mengutip lirik.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Idgitaf, AMI Awards",
+   "status": "rencana"
+  },
+  {
+   "id": 5,
+   "jadwal": "2026-11-30",
+   "judulKerja": "Makna lagu “Teh Hijau” Tulus, Karya Produksi Terbaik AMI 2026",
+   "kataKunci": "makna lagu teh hijau tulus",
+   "kataKunciTambahan": [
+    "teh hijau tulus",
+    "arti lagu teh hijau"
+   ],
+   "niat": "informasional",
+   "sudut": "Tafsir makna dari wawancara/pernyataan resmi Tulus; JANGAN menulis lirik dalam bentuk apa pun, cukup parafrase tema.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Tulus, AMI Awards",
+   "status": "rencana"
+  },
+  {
+   "id": 6,
+   "jadwal": "2026-11-30",
+   "judulKerja": "Lineup DWP 2026 dan tips nonton Djakarta Warehouse Project",
+   "kataKunci": "lineup dwp 2026",
+   "kataKunciTambahan": [
+    "djakarta warehouse project 2026",
+    "tiket dwp 2026"
+   ],
+   "niat": "informasional",
+   "sudut": "Lineup resmi, tanggal 11–13 Desember (verifikasi), tips praktis.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "DWP, Festival, Konser",
+   "status": "rencana"
+  },
+  {
+   "id": 7,
+   "jadwal": "2026-12-01",
+   "judulKerja": "no na ke Coachella 2027: perjalanan girl group Indonesia sampai panggung dunia",
+   "kataKunci": "no na coachella 2027",
+   "kataKunciTambahan": [
+    "no na rollerblade",
+    "girl group indonesia coachella"
+   ],
+   "niat": "informasional",
+   "sudut": "Profil singkat no na, Rollerblade, AMI 2026, jadwal Coachella April 2027 (verifikasi).",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "no na, Coachella",
+   "status": "rencana"
+  },
+  {
+   "id": 8,
+   "jadwal": "2026-12-01",
+   "judulKerja": "Lagu Indonesia yang viral di TikTok sepanjang 2026",
+   "kataKunci": "lagu viral tiktok 2026",
+   "kataKunciTambahan": [
+    "lagu indonesia viral 2026",
+    "lagu fyp 2026"
+   ],
+   "niat": "informasional",
+   "sudut": "Pilih 8–10 lagu dengan bukti viral (chart/sumber media). Tanpa lirik.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Lagu Viral, TikTok",
+   "status": "rencana"
+  },
+  {
+   "id": 9,
+   "jadwal": "2026-12-02",
+   "judulKerja": "Konser dan acara tahun baru 2027 di Jakarta dan sekitarnya",
+   "kataKunci": "konser tahun baru 2027",
+   "kataKunciTambahan": [
+    "acara tahun baru 2027 jakarta",
+    "malam tahun baru 2027"
+   ],
+   "niat": "informasional",
+   "sudut": "Hanya acara yang sudah diumumkan resmi; cantumkan venue & tiket.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "Konser, Tahun Baru",
+   "status": "rencana"
+  },
+  {
+   "id": 10,
+   "jadwal": "2026-12-02",
+   "judulKerja": "Lineup LaLaLa Fest 2027 Jakarta: Olivia Dean, Jungle, dan lainnya",
+   "kataKunci": "lalala fest 2027",
+   "kataKunciTambahan": [
+    "lineup lalala fest 2027",
+    "tiket lalala fest jakarta"
+   ],
+   "niat": "informasional",
+   "sudut": "Lineup, tanggal, venue, harga tiket dari sumber resmi.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "LaLaLa Fest, Olivia Dean, Festival",
+   "status": "rencana"
+  },
+  {
+   "id": 11,
+   "jadwal": "2026-12-03",
+   "judulKerja": "Kaleidoskop musik Indonesia 2026: momen yang paling diingat",
+   "kataKunci": "kaleidoskop musik 2026",
+   "kataKunciTambahan": [
+    "musik indonesia 2026",
+    "rekap musik 2026"
+   ],
+   "niat": "informasional",
+   "sudut": "Bulan per bulan, momen besar (rilisan, konser, penghargaan). Tautkan ke artikel Antarala yang relevan.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Kaleidoskop, Industri Musik",
+   "status": "rencana"
+  },
+  {
+   "id": 12,
+   "jadwal": "2026-12-03",
+   "judulKerja": "Album Indonesia terbaik 2026 pilihan Redaksi Antarala",
+   "kataKunci": "album indonesia terbaik 2026",
+   "kataKunciTambahan": [
+    "album terbaik 2026",
+    "rekomendasi album indonesia"
+   ],
+   "niat": "komersial-informasional",
+   "sudut": "Daftar 10–15 album dengan alasan singkat masing-masing; sebut pilihan redaksi.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Album Terbaik, Rilisan Baru",
+   "status": "rencana"
+  },
+  {
+   "id": 13,
+   "jadwal": "2026-12-04",
+   "judulKerja": "Festival musik 2027 di Indonesia yang sudah diumumkan",
+   "kataKunci": "festival musik 2027",
+   "kataKunciTambahan": [
+    "jadwal festival musik 2027",
+    "festival musik indonesia 2027"
+   ],
+   "niat": "informasional",
+   "sudut": "Daftar festival + tanggal/kota resmi; perbarui berkala (dateModified).",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "Festival, Konser",
+   "status": "rencana"
+  },
+  {
+   "id": 14,
+   "jadwal": "2026-12-04",
+   "judulKerja": "Jadwal konser Januari 2027 di Indonesia",
+   "kataKunci": "jadwal konser januari 2027",
+   "kataKunciTambahan": [
+    "konser januari 2027 jakarta"
+   ],
+   "niat": "informasional",
+   "sudut": "Hanya yang resmi diumumkan.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "Konser, Jadwal Konser",
+   "status": "rencana"
+  },
+  {
+   "id": 15,
+   "jadwal": "2026-12-05",
+   "judulKerja": "Cara beli tiket konser yang aman: hindari calo dan penipuan",
+   "kataKunci": "cara beli tiket konser aman",
+   "kataKunciTambahan": [
+    "tiket konser palsu",
+    "war tiket konser tips"
+   ],
+   "niat": "informasional",
+   "sudut": "Evergreen: kanal resmi, tanda penipuan, hak pembeli. Sumber: promotor/platform resmi, berita kasus.",
+   "kategori": "Feature",
+   "topik": "kultur",
+   "tag": "Tiket Konser, Tips",
+   "status": "rencana"
+  },
+  {
+   "id": 16,
+   "jadwal": "2026-12-05",
+   "judulKerja": "Euphoria Life Festival 2027 Bandung: lineup dan info tiket",
+   "kataKunci": "euphoria life festival 2027",
+   "kataKunciTambahan": [
+    "festival bandung 2027"
+   ],
+   "niat": "informasional",
+   "sudut": "Lineup (Perunggu, Naykilla, dll. – verifikasi), tanggal, venue.",
+   "kategori": "Feature",
+   "topik": "konser",
+   "tag": "Festival, Bandung",
+   "status": "rencana"
+  },
+  {
+   "id": 17,
+   "jadwal": "2026-12-06",
+   "judulKerja": "Makna lagu “Sampaikan ke Kawan”, kolaborasi Hindia, Lafa Pratomo, dan Banda Neira",
+   "kataKunci": "makna lagu sampaikan ke kawan",
+   "kataKunciTambahan": [
+    "sampaikan ke kawan hindia",
+    "garis tegak lafa pratomo"
+   ],
+   "niat": "informasional",
+   "sudut": "Tafsir dari pernyataan resmi + artikel Antarala sebelumnya (tautkan). Tanpa lirik.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Hindia, Lafa Pratomo, Banda Neira",
+   "status": "rencana"
+  },
+  {
+   "id": 18,
+   "jadwal": "2026-12-06",
+   "judulKerja": "Lagu indie Indonesia terbaru yang wajib masuk playlist bulan ini",
+   "kataKunci": "lagu indie indonesia terbaru",
+   "kataKunciTambahan": [
+    "rekomendasi lagu indie",
+    "lagu indie 2026"
+   ],
+   "niat": "komersial-informasional",
+   "sudut": "Kurasi 8–10 rilisan sebulan terakhir, tautkan ke update Antarala.",
+   "kategori": "Feature",
+   "topik": "musik",
+   "tag": "Musik Indie, Rilisan Baru",
+   "status": "rencana"
+  }
+ ]
+}

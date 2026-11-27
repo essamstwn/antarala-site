@@ -16,6 +16,7 @@ Selain field lama (slug, judul, ringkas, penulis, kategori, isi, referensi, dst.
 - `topik`: `musik` | `konser` | `film` | `kultur` (default musik) → halaman `topik/<topik>.html`
 - `tag`: teks dipisah koma, mis. `"Hindia, Lafa Pratomo, Rilisan Baru"` → halaman `tag/<slug>.html`. Tag yang punya ≥2 tulisan diindeks Google dan otomatis ditautkan dari isi artikel.
 - `judulSeo`: judul pendek ±60 karakter untuk Google (opsional)
+- `faq`: array `[[pertanyaan, jawaban], ...]` (opsional) → bagian "Pertanyaan yang sering ditanyakan" + schema FAQPage. Pakai di artikel SEO.
 - `poin`: array 2–3 kalimat "Intinya" di atas artikel (opsional; bagus untuk Google & asisten AI)
 
 ## Halaman yang dibuat otomatis
@@ -25,3 +26,6 @@ Beranda, `update.html`, `opini.html`, `feature.html` (12 per halaman), `topik/*`
 Domain utama: https://antarala.co.id (addon domain di cPanel, folder yang sama dengan antarala.futurinc.co.id). Alamat lama antarala.futurinc.co.id dialihkan 301 ke domain baru lewat `static/.htaccess`. `SITE` di `tools/gen.js` (dan gen.js di editor) harus selalu https://antarala.co.id/.
 
 Berita harian ditulis otomatis oleh Claude tiap pagi, di-build, lalu di-push ke repo ini.
+
+## Artikel SEO harian
+`content/rencana-seo.json` berisi rencana artikel SEO (kata kunci, sudut, jadwal, status). Tugas harian menerbitkan 3 update berita + 2 artikel SEO per hari. Artikel SEO disimpan seperti berita (`content/berita/<slug>.json` + database editor `berita/<slug>`) dengan `kategori: "Feature"` dan `penulis: "Redaksi Antarala"`, 600–1000 kata, wajib `judulSeo`, `poin`, `tag`, `topik`, dan 3–5 `faq`. Aturan lengkap ada di skill `antarala-seo-konten`.

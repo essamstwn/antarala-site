@@ -167,7 +167,7 @@ function build(ARTICLES, opts) {
 <meta property="og:description" content="${e(desc)}">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${ogImg}">
-<meta property="og:image:alt" content="${e(title)}">
+${og === "og-antarala.jpg" ? '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n' : ""}<meta property="og:image:alt" content="${e(title)}">
 ${articleMeta}<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${e(title)}">
 <meta name="twitter:description" content="${e(desc)}">
@@ -202,7 +202,7 @@ ${opts.ga ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${op
     <form class="srch" action="${root}cari.html" role="search"><label class="sr" for="dq">Cari</label><input id="dq" name="q" type="search" placeholder="Cari musisi, lagu, konser…"><button class="ic" aria-label="Cari">${I.search}</button></form>
     <p class="drawer-l">Rubrik</p><div class="drawer-g">${SECTIONS.slice(0, 3).map(([h, t]) => `<a href="${root}${h}">${t}</a>`).join("")}</div>
     <p class="drawer-l">Topik</p><div class="drawer-g">${Object.entries(TOPIK).map(([k, t]) => `<a href="${root}topik/${k}.html">${t.nama}</a>`).join("")}</div>
-    <p class="drawer-l">Antarala</p><div class="drawer-g"><a href="${root}tentang.html">Tentang</a><a href="${root}pedoman.html">Pedoman redaksi</a><a href="${root}kontak.html">Kontak</a><a href="${root}brief.html">Kirim brief rilisan</a><a href="${mailto("Sumbang Tulisan")}">Sumbang tulisan</a></div>
+    <p class="drawer-l">Antarala</p><div class="drawer-g"><a href="${root}tentang.html">Tentang</a><a href="${root}pedoman.html">Pedoman redaksi</a><a href="${root}kontak.html">Kontak</a><a href="${root}rilis-pers.html">Kirim rilis pers</a><a href="${root}brief.html">Kirim brief rilisan</a><a href="${mailto("Sumbang Tulisan")}">Sumbang tulisan</a></div>
     ${follow()}
   </div>
 </div>
@@ -214,7 +214,7 @@ ${body}
     <div class="ft-b"><img src="${A}img/logo-light.png" alt="antarala" width="134" height="30" loading="lazy"><p>${ABOUT}</p>${follow()}</div>
     <div><h2>Rubrik</h2><ul>${SECTIONS.slice(0, 3).map(([h, t]) => `<li><a href="${root}${h}">${t}</a></li>`).join("")}<li><a href="${root}cari.html">Cari</a></li></ul></div>
     <div><h2>Topik</h2><ul>${Object.entries(TOPIK).map(([k, t]) => `<li><a href="${root}topik/${k}.html">${t.nama}</a></li>`).join("")}</ul></div>
-    <div><h2>Antarala</h2><ul><li><a href="${root}tentang.html">Tentang</a></li><li><a href="${root}pedoman.html">Pedoman redaksi</a></li><li><a href="${root}kontak.html">Kontak</a></li><li><a href="${root}brief.html">Kirim brief rilisan</a></li><li><a href="${SITE}feed.xml">${I.rss} RSS</a></li></ul></div>
+    <div><h2>Antarala</h2><ul><li><a href="${root}tentang.html">Tentang</a></li><li><a href="${root}pedoman.html">Pedoman redaksi</a></li><li><a href="${root}kontak.html">Kontak</a></li><li><a href="${root}rilis-pers.html">Kirim rilis pers</a></li><li><a href="${root}brief.html">Kirim brief rilisan</a></li><li><a href="${SITE}feed.xml">${I.rss} RSS</a></li></ul></div>
   </div>
   <p class="ft-c">© ${YEAR} Antarala. Bagian dari <a href="https://futurinc.co.id/" rel="noopener">FUTURINC</a>. · <a href="mailto:${EMAIL}">${EMAIL}</a></p>
 </div></footer>
@@ -348,6 +348,7 @@ ${ft.length ? sec("Feature", "feature.html", "Semua feature", `<div class="g3">$
     const yt = ytId ? `<figure class="yt"><div class="yt-f" data-id="${ytId}"><button type="button" aria-label="Putar video YouTube"><img src="https://i.ytimg.com/vi/${ytId}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt-p" aria-hidden="true"></span></button></div><figcaption>Video resmi via YouTube</figcaption></figure>` : "";
     const ig = a.ig ? `<p class="igl"><a href="${e(a.ig)}" target="_blank" rel="noopener">Lihat postingan aslinya di Instagram →</a></p>` : "";
     const poin = (a.poin || []).filter(Boolean);
+    const faq = (a.faq || []).filter(f => f && f[0] && f[1]);
     const intinya = poin.length ? `<section class="tl-dr" aria-label="Intinya"><h2>Intinya</h2><ul>${poin.map(p => `<li>${p}</li>`).join("")}</ul></section>` : "";
     const auSlug = penulisSlug(a.penulis), auInfo = AUTHORS[a.penulis] || {};
     const pub = iso(a.tanggal, a.jam), mod = a.diperbarui && a.diperbarui > (a.tanggal || "") ? iso(a.diperbarui, "12:00") : pub;
@@ -361,6 +362,7 @@ ${ft.length ? sec("Feature", "feature.html", "Semua feature", `<div class="g3">$
       datePublished: pub || undefined, dateModified: mod || undefined, author, editor: { "@type": "Person", name: REDAKSI.editor }, publisher: { "@id": SITE + "#org" }, inLanguage: "id-ID", articleSection: r.nama,
       keywords: tags.map(t => t.nama).concat([T.nama]).join(", ") || undefined, about: tags.slice(0, 5).map(t => ({ "@type": "Thing", name: t.nama })), wordCount: words, isAccessibleForFree: true,
       citation: (a.referensi || []).filter(x => x[1]).map(x => x[1]) }];
+    if (faq.length) ld.push({ "@type": "FAQPage", "@id": url + "#faq", mainEntity: faq.map(f => ({ "@type": "Question", name: strip(f[0]), acceptedAnswer: { "@type": "Answer", text: strip(f[1]) } })) });
     const artMeta = `<meta property="article:published_time" content="${pub}">\n<meta property="article:modified_time" content="${mod}">\n<meta property="article:section" content="${e(r.nama)}">\n${tags.map(t => `<meta property="article:tag" content="${e(t.nama)}">\n`).join("")}<meta name="author" content="${e(a.penulis)}">\n`;
     const body = `<article class="ar">
 <div class="wrap">
@@ -381,6 +383,7 @@ ${intinya}
 ${bodyHtml}
 ${yt}
 ${ig}
+${faq.length ? `<section class="faq"><h2>Pertanyaan yang sering ditanyakan</h2>${faq.map(f => `<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("")}</section>` : ""}
 ${tags.length ? `<div class="ar-tags"><span>Tag</span>${tags.map(t => `<a href="../tag/${t.slug}.html">${e(t.nama)}</a>`).join("")}</div>` : ""}
 ${refs}
 <div class="sh"><span>Bagikan</span><a class="bt" data-sh="wa" href="https://wa.me/?text=${encodeURIComponent(strip(a.judul) + " " + url)}" target="_blank" rel="noopener">WhatsApp</a><a class="bt" data-sh="x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(strip(a.judul))}&amp;url=${encodeURIComponent(url)}" target="_blank" rel="noopener">X</a><button class="bt" type="button" data-sh="cp">Salin tautan</button><span class="sh-t" role="status"></span></div>
@@ -440,13 +443,35 @@ ${follow()}`, "", [{ "@type": "AboutPage", "@id": SITE + "tentang.html", url: SI
 <p>Konten kerja sama atau berbayar akan kami tandai dengan jelas.</p>`);
 
   const opt = [["Kerja sama & iklan", "Kolaborasi konten, promosi rilisan, atau kampanye brand bersama Antarala.", "Inquiry Kerja Sama"],
-    ["Kirim rilis pers", "Musisi, label, atau penyelenggara acara yang ingin kabarnya diliput.", "Rilis Pers"],
+    ["Kirim rilis pers", "Musisi, label, atau penyelenggara acara yang ingin kabarnya diliput. Panduannya ada di halaman Kirim rilis pers.", "Rilis Pers"],
     ["Sumbang tulisan", "Kirim opini atau tulisanmu. Lampirkan naskah, foto, dan sumber fotonya.", "Sumbang Tulisan"],
     ["Koreksi & pertanyaan", "Menemukan kesalahan atau punya masukan? Kabari kami.", "Koreksi"]];
   staticPage("kontak.html", "Kontak Antarala — Kerja Sama, Rilis Pers, Sumbang Tulisan", "Hubungi Antarala untuk kerja sama, rilis pers, sumbang tulisan, atau koreksi.", "Kontak", `
 <p class="st-l">Semua pertanyaan dan kerja sama bisa dikirim ke <a href="mailto:${EMAIL}"><b>${EMAIL}</b></a>. Pilih topiknya supaya subjek email terisi otomatis.</p>
 <div class="kg">${opt.map(([t, d, s]) => `<a class="kc" href="${mailto(s)}"><h2>${t}</h2><p>${d}</p><span>Kirim email ${I.arrow}</span></a>`).join("")}<a class="kc kc-d" href="brief.html"><h2>Brief campaign rilisan</h2><p>Musisi dan label: isi brief sekali, tim kami kirim rekomendasi campaign.</p><span>Isi brief ${I.arrow}</span></a></div>
 ${follow()}`, "", [{ "@type": "ContactPage", url: SITE + "kontak.html", name: "Kontak Antarala" }]);
+
+  staticPage("rilis-pers.html", "Kirim Rilis Pers ke Antarala — Panduan untuk Musisi, Label, dan Promotor", "Cara mengirim rilis pers rilisan, konser, atau festival ke Redaksi Antarala: isi yang dibutuhkan, format foto, dan kontak.", "Kirim rilis pers", `
+<p class="st-l">Punya rilisan baru, konser, atau festival yang ingin diliput? Kirim rilis persnya ke Redaksi Antarala. Setiap kiriman kami baca, dan kabar yang relevan buat pembaca kami tulis di rubrik Update.</p>
+<h2>Kirim ke mana</h2>
+<p>Email ke <a href="${mailto("Rilis Pers")}"><b>${EMAIL}</b></a> dengan subjek <b>Rilis Pers: [nama musisi/acara] – [judul rilisan/acara]</b>. Kirim paling lambat di hari rilis. Kabar yang dikirim beberapa hari sebelumnya bisa kami siapkan lebih rapi.</p>
+<h2>Yang perlu ada di rilis pers</h2>
+<ul class="ls-ul">
+<li>Nama musisi/band, judul rilisan atau acara, dan tanggal rilis atau tanggal acara.</li>
+<li>Label, manajemen, atau promotor, plus kontak yang bisa dihubungi untuk konfirmasi.</li>
+<li>Cerita di balik lagu atau acara: siapa yang terlibat, proses pembuatan, makna, atau hal unik lainnya.</li>
+<li>Kutipan resmi dari musisi atau penyelenggara, kalau ada.</li>
+<li>Link resmi: Spotify/YouTube/Apple Music, video klip, halaman tiket, dan akun media sosial.</li>
+<li>Untuk konser dan festival: venue, kota, jadwal, kategori dan harga tiket, serta tempat pembelian resmi.</li>
+</ul>
+<h2>Foto dan aset</h2>
+<ul class="ls-ul">
+<li>Foto press atau artwork resmi, orientasi horizontal, minimal 1600 piksel di sisi terpanjang (JPG/PNG).</li>
+<li>Cantumkan kredit foto yang harus kami tulis.</li>
+<li>Kirim lewat lampiran atau link Google Drive/Dropbox yang bisa dibuka tanpa minta akses.</li>
+</ul>
+<h2>Yang perlu kamu tahu</h2>
+<p>Kami memilih kabar berdasarkan relevansinya buat pembaca, jadi tidak semua rilis pers bisa kami muat. Tulisan dibuat ulang dengan gaya Antarala dan sumbernya kami cantumkan di bagian Referensi. Liputan editorial tidak berbayar. Untuk promosi atau campaign berbayar, gunakan <a href="brief.html">brief campaign rilisan</a>, dan konten kerja sama akan kami tandai dengan jelas sesuai <a href="pedoman.html">pedoman redaksi</a>.</p>`);
 
   // pencarian (data dari search.json)
   out["cari.html"] = page("cari.html", { title: "Cari di Antarala", desc: "Cari berita musik, opini, dan feature di Antarala.", robots: "noindex, follow", active: "",

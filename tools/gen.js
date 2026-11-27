@@ -49,9 +49,10 @@ const TAG_INFO = {
   "industri-musik": "Tulisan soal perubahan industri musik Indonesia: dari era kaset ke streaming, royalti, sampai musik buatan AI."
 };
 // bio penulis (opsional). Isi di sini kalau ada.
-const REDAKSI = { pemred: "Essam Setiawan", editor: "Syilfa Adistya" };
+const REDAKSI = { pemred: "Essam Setiawan", editor: "Syilfa Adistya", penulis: ["Marsya Miranda"] };
 const AUTHORS = {
   "Essam Setiawan": { bio: "Pemimpin Redaksi Antarala." },
+  "Marsya Miranda": { bio: "Penulis di redaksi Antarala." },
   "Redaksi Antarala": { org: true, bio: "Tim redaksi Antarala. Merangkum kabar musik dan kultur pop terbaru setiap hari, dengan minimal dua sumber kredibel atau satu sumber resmi untuk setiap kabar." }
 };
 
@@ -68,7 +69,7 @@ const iso = (d, t) => d ? `${d}T${(t || "09:00").slice(0, 5)}:00+07:00` : "";
 const byDate = (p, q) => ((q.tanggal || "") + (q.jam || "")).localeCompare((p.tanggal || "") + (p.jam || ""));
 const mailto = s => `mailto:${EMAIL}?subject=${encodeURIComponent(s)}`;
 const penulisSlug = n => slugify(n) || "redaksi";
-const peran = n => n === "Redaksi Antarala" ? "Redaksi" : n === REDAKSI.pemred ? "Pemimpin Redaksi" : n === REDAKSI.editor ? "Editor" : "Kontributor";
+const peran = n => n === "Redaksi Antarala" ? "Redaksi" : n === REDAKSI.pemred ? "Pemimpin Redaksi" : n === REDAKSI.editor ? "Editor" : REDAKSI.penulis.includes(n) ? "Penulis" : "Kontributor";
 
 const I = {
   ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
@@ -134,7 +135,7 @@ function build(ARTICLES, opts) {
   const ORG = { "@type": "NewsMediaOrganization", "@id": SITE + "#org", name: "Antarala", alternateName: ["antarala", "Antarala Media"], url: SITE,
     logo: { "@type": "ImageObject", url: SITE + "assets/img/icon-512.png", width: 512, height: 512 }, description: ABOUT, email: EMAIL,
     sameAs: [IG, TT], parentOrganization: PARENT, masthead: SITE + "tentang.html#redaksi",
-    employee: [{ "@type": "Person", name: REDAKSI.pemred, jobTitle: "Pemimpin Redaksi", url: SITE + "penulis/" + slugify(REDAKSI.pemred) + ".html" }, { "@type": "Person", name: REDAKSI.editor, jobTitle: "Editor" }], publishingPrinciples: SITE + "pedoman.html", ethicsPolicy: SITE + "pedoman.html", correctionsPolicy: SITE + "pedoman.html#koreksi" };
+    employee: [{ "@type": "Person", name: REDAKSI.pemred, jobTitle: "Pemimpin Redaksi", url: SITE + "penulis/" + slugify(REDAKSI.pemred) + ".html" }, { "@type": "Person", name: REDAKSI.editor, jobTitle: "Editor" }].concat(REDAKSI.penulis.map(n => ({ "@type": "Person", name: n, jobTitle: "Penulis", url: SITE + "penulis/" + slugify(n) + ".html" }))), publishingPrinciples: SITE + "pedoman.html", ethicsPolicy: SITE + "pedoman.html", correctionsPolicy: SITE + "pedoman.html#koreksi" };
   const WEBSITE = { "@type": "WebSite", "@id": SITE + "#web", name: "Antarala", url: SITE, inLanguage: "id-ID", description: BIO, publisher: { "@id": SITE + "#org" },
     potentialAction: { "@type": "SearchAction", target: { "@type": "EntryPoint", urlTemplate: SITE + "cari.html?q={search_term_string}" }, "query-input": "required name=search_term_string" } };
   const crumbs = list => ({ "@type": "BreadcrumbList", itemListElement: list.map(([name, url], i) => ({ "@type": "ListItem", position: i + 1, name, item: url })) });
@@ -383,7 +384,7 @@ ${ig}
 ${tags.length ? `<div class="ar-tags"><span>Tag</span>${tags.map(t => `<a href="../tag/${t.slug}.html">${e(t.nama)}</a>`).join("")}</div>` : ""}
 ${refs}
 <div class="sh"><span>Bagikan</span><a class="bt" data-sh="wa" href="https://wa.me/?text=${encodeURIComponent(strip(a.judul) + " " + url)}" target="_blank" rel="noopener">WhatsApp</a><a class="bt" data-sh="x" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(strip(a.judul))}&amp;url=${encodeURIComponent(url)}" target="_blank" rel="noopener">X</a><button class="bt" type="button" data-sh="cp">Salin tautan</button><span class="sh-t" role="status"></span></div>
-<aside class="au"><p class="au-k">${peran(a.penulis) === "Kontributor" ? "Kontributor" : peran(a.penulis) === "Redaksi" ? "Ditulis oleh" : peran(a.penulis)}</p><p class="au-n"><a href="../penulis/${auSlug}.html">${e(a.penulis)}</a></p>${auInfo.bio ? `<p class="au-b">${e(auInfo.bio)}</p>` : ""}${a.kategori === "Opini" ? `<p class="au-b">${peran(a.penulis) === "Kontributor" ? `${e(a.penulis)} adalah kontributor Antarala. ` : ""}Tulisan opini adalah pandangan pribadi penulis. <a href="../pedoman.html">Pedoman redaksi</a> · <a href="${mailto("Sumbang Tulisan")}">Sumbang tulisan</a></p>` : ""}</aside>
+<aside class="au"><p class="au-k">${["Redaksi", "Penulis"].includes(peran(a.penulis)) ? "Ditulis oleh" : peran(a.penulis)}</p><p class="au-n"><a href="../penulis/${auSlug}.html">${e(a.penulis)}</a></p>${auInfo.bio ? `<p class="au-b">${e(auInfo.bio)}</p>` : ""}${a.kategori === "Opini" ? `<p class="au-b">${peran(a.penulis) === "Kontributor" ? `${e(a.penulis)} adalah kontributor Antarala. ` : ""}Tulisan opini adalah pandangan pribadi penulis. <a href="../pedoman.html">Pedoman redaksi</a> · <a href="${mailto("Sumbang Tulisan")}">Sumbang tulisan</a></p>` : ""}</aside>
     </div>
   </div>
 </div>
@@ -413,7 +414,7 @@ document.querySelectorAll('.yt-f').forEach(f=>f.querySelector('button').onclick=
 <h2>Siapa di balik Antarala</h2>
 <p>Antarala adalah bagian dari <a href="https://futurinc.co.id/" rel="noopener">FUTURINC</a>, agensi digital di Indonesia. Update harian disusun oleh Redaksi Antarala, sementara feature dan opini ditulis oleh tim dan para kontributor.</p>
 <h2 id="redaksi">Susunan redaksi</h2>
-<ul class="wr"><li><a href="penulis/${slugify(REDAKSI.pemred)}.html">${REDAKSI.pemred}</a><span>Pemimpin Redaksi</span></li><li><b>${REDAKSI.editor}</b><span>Editor</span></li><li><b>Kontributor</b><span>Penulis tamu lewat Sumbang Tulisan</span></li></ul>
+<ul class="wr"><li><a href="penulis/${slugify(REDAKSI.pemred)}.html">${REDAKSI.pemred}</a><span>Pemimpin Redaksi</span></li><li><b>${REDAKSI.editor}</b><span>Editor</span></li>${REDAKSI.penulis.map(n => `<li><a href="penulis/${slugify(n)}.html">${n}</a><span>Penulis</span></li>`).join("")}<li><b>Kontributor</b><span>Penulis tamu lewat Sumbang Tulisan</span></li></ul>
 <h2 id="penulis">Kontributor</h2>
 <p>Feature dan opini di Antarala banyak ditulis oleh kontributor: penulis dan pendengar yang mengirim tulisan lewat program <a href="${mailto("Sumbang Tulisan")}">Sumbang Tulisan</a>. Nama penulis selalu tercantum di setiap tulisan.</p>
 <ul class="wr">${writers.map(w => `<li><a href="penulis/${w.slug}.html">${e(w.nama)}</a><span>${w.items.length} tulisan</span></li>`).join("")}</ul>

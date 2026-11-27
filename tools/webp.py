@@ -8,7 +8,7 @@ for f in sorted(os.listdir(d)):
     if not (f.startswith("cover-") and f.lower().endswith((".jpg", ".jpeg", ".png"))): continue
     src = os.path.join(d, f); base = os.path.splitext(f)[0]
     im = None
-    for width in (640, 1200):
+    for width in (320, 640, 960, 1200):
         out = os.path.join(w, f"{base}-{width}.webp")
         if os.path.exists(out) and os.path.getmtime(out) >= os.path.getmtime(src): continue
         if im is None: im = ImageOps.exif_transpose(Image.open(src)).convert("RGB")

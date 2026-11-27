@@ -106,11 +106,13 @@ function build(ARTICLES, opts) {
   const ver = a => (a.diperbarui || "").replace(/-/g, "") || VER;
   const imgURL = (a, root) => opts.img ? opts.img(a, root) : `${root}assets/img/${a.cover}?v=${ver(a)}`;
   const webp = (a, root, w) => `${root}assets/img/w/${String(a.cover).replace(/\.\w+$/, "")}-${w}.webp?v=${ver(a)}`;
-  function pic(a, root, { eager = false, sizes = "(max-width: 760px) 100vw, 33vw" } = {}) {
+  const srcset = (a, root) => [320, 640, 960, 1200].map(w => `${webp(a, root, w)} ${w}w`).join(", ");
+  const G3 = "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 400px";
+  function pic(a, root, { eager = false, sizes = G3 } = {}) {
     const pos = a.fokus ? ` style="object-position:${e(a.fokus)}"` : "";
     const img = `<img src="${imgURL(a, root)}" alt="${e(a.alt || strip(a.judul))}" width="1200" height="900" ${eager ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"'}${pos}>`;
     if (!opts.webp || opts.img) return img;
-    return `<picture><source type="image/webp" srcset="${webp(a, root, 640)} 640w, ${webp(a, root, 1200)} 1200w" sizes="${sizes}">${img}</picture>`;
+    return `<picture><source type="image/webp" srcset="${srcset(a, root)}" sizes="${sizes}">${img}</picture>`;
   }
   const rubLink = (a, root) => `<a class="rb rb-${rub(a).slug}" href="${root}${rub(a).slug}.html">${rub(a).nama}</a>`;
   const meta = (a, withRead = true) => `<span class="mt">${a.tanggal ? `<time datetime="${iso(a.tanggal, a.jam)}">${tgl(a.tanggal, true)}</time>` : ""}${withRead ? `<span>${a.menit || 2} menit baca</span>` : ""}</span>`;
@@ -127,7 +129,7 @@ function build(ARTICLES, opts) {
   ${n ? `<span class="rw-n" aria-hidden="true">${String(n).padStart(2, "0")}</span>` : ""}
   <div class="rw-tx"><div class="kk">${rubLink(a, root)}${meta(a, false)}</div>
   <h3 class="rw-h"><a href="${art(a, root)}">${a.judul}</a></h3></div>
-  <a class="rw-ph" href="${art(a, root)}" tabindex="-1" aria-hidden="true">${pic(a, root, { sizes: "120px" })}</a>
+  <a class="rw-ph" href="${art(a, root)}" tabindex="-1" aria-hidden="true">${pic(a, root, { sizes: "(max-width: 520px) 96px, 120px" })}</a>
 </article>`;
   const follow = () => `<div class="fl"><a class="bt bt-s" href="${IG}" target="_blank" rel="noopener me">${I.ig} @antarala__</a><a class="bt" href="${TT}" target="_blank" rel="noopener me">${I.tt} TikTok</a></div>`;
 
@@ -270,8 +272,8 @@ const s=document.querySelector('.strip [aria-current]');if(s)s.scrollIntoView({i
     const sec = (h, href, more, inner) => `<section class="sc"><div class="wrap"><div class="sc-hd"><h2>${h}</h2><a href="${href}">${more} ${I.arrow}</a></div>${inner}</div></section>`;
     const body = `<h1 class="sr">Antarala — media musik dan kultur pop Indonesia</h1>
 ${lead ? `<section class="hero"><div class="wrap hero-g">
-  ${card(lead, "", { cls: "cd-lead", eager: true, hx: "h2", sizes: "(max-width: 760px) 100vw, 60vw" })}
-  <div class="hero-s">${side.map(a => card(a, "", { cls: "cd-side", hx: "h2", sizes: "(max-width: 760px) 100vw, 30vw" })).join("")}</div>
+  ${card(lead, "", { cls: "cd-lead", eager: true, hx: "h2", sizes: "(max-width: 760px) 100vw, 760px" })}
+  <div class="hero-s">${side.map(a => card(a, "", { cls: "cd-side", hx: "h2", sizes: "(max-width: 760px) 120px, 400px" })).join("")}</div>
 </div></section>` : ""}
 <section class="sc sc-up"><div class="wrap up-g">
   <div><div class="sc-hd"><h2>Update terbaru</h2><a href="update.html">Semua update ${I.arrow}</a></div>
@@ -290,7 +292,8 @@ ${ft.length ? sec("Feature", "feature.html", "Semua feature", `<div class="g3">$
   <div><h2>Punya opini yang pengin dibaca banyak orang?</h2><p>Kirim tulisanmu soal musik, kultur, atau hal-hal yang bikin kamu mikir. Tim Antarala membaca setiap kiriman.</p></div>
   <a class="bt bt-l" href="${mailto("Sumbang Tulisan")}">Sumbang tulisan ${I.arrow}</a>
 </div></section>`;
-    out["index.html"] = page("index.html", { title: "Antarala — Berita Musik, Opini, dan Kultur Pop Indonesia", desc: "Antarala ngomongin musik, kultur, dan pikiran di antaranya: berita musik Indonesia terbaru, rilisan baru, konser, feature, dan opini.", body, active: "home",
+    const preload = lead && opts.webp && !opts.img ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${srcset(lead, "")}" imagesizes="(max-width: 760px) 100vw, 760px" fetchpriority="high">\n` : "";
+    out["index.html"] = page("index.html", { head: preload, title: "Antarala — Berita Musik, Opini, dan Kultur Pop Indonesia", desc: "Antarala ngomongin musik, kultur, dan pikiran di antaranya: berita musik Indonesia terbaru, rilisan baru, konser, feature, dan opini.", body, active: "home",
       ld: [ORG, WEBSITE, { "@type": "ItemList", name: "Sorotan Antarala", itemListElement: top.concat(latest).map((a, i) => ({ "@type": "ListItem", position: i + 1, url: SITE + `artikel/${a.slug}.html` })) }] });
     sitemapUrls.push(["", ALL[0] ? (ALL[0].diperbarui || ALL[0].tanggal) : ""]);
   }
@@ -396,7 +399,8 @@ ${refs}
 <div class="g3">${rel.slice(1, 4).map(o => card(o, root)).join("")}</div></div></section>
 <script>{document.querySelectorAll('[data-sh=cp]').forEach(b=>b.onclick=()=>{const t=document.querySelector('.sh-t');navigator.clipboard.writeText(location.href).then(()=>t.textContent='Tautan disalin',()=>t.textContent=location.href)});
 document.querySelectorAll('.yt-f').forEach(f=>f.querySelector('button').onclick=()=>{f.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+f.dataset.id+'?autoplay=1" title="Video YouTube" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'});}</script>`;
-    out[path] = page(path, { title, desc: strip(a.ringkas), body, active: r.slug, og: a.cover, ld, type: "article", articleMeta: artMeta });
+    const heroPre = opts.webp && !opts.img ? `<link rel="preload" as="image" type="image/webp" imagesrcset="${srcset(a, root)}" imagesizes="(max-width: 900px) 100vw, 900px" fetchpriority="high">\n` : "";
+    out[path] = page(path, { head: heroPre, title, desc: strip(a.ringkas), body, active: r.slug, og: a.cover, ld, type: "article", articleMeta: artMeta });
     sitemapUrls.push([path, a.diperbarui || a.tanggal, a]);
   }
 

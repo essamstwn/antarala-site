@@ -13,7 +13,7 @@ const SITE = "https://antarala.co.id/";
 const IG = "https://www.instagram.com/antarala__/";
 const TT = "https://www.tiktok.com/@antarala__";
 const EMAIL = "antarala@futurinc.co.id";
-const ADSENSE = "ca-pub-3974855070846706"; // Google AdSense (opts.adsense === false untuk mematikan)
+const ADSENSE = "ca-pub-3974855070846706"; // Google AdSense; tidak dipasang di pratinjau editor (opts.assets) atau bila opts.adsense === false
 const PARENT = { "@type": "Organization", name: "FUTURINC", url: "https://futurinc.co.id/" };
 const BIO = "Ngomongin musik, kultur, pikiran, dan kabar yang menarik di antaranya.";
 const ABOUT = "Antarala adalah media musik dan kultur pop Indonesia. Kami menulis kabar rilisan dan konser terbaru, feature soal musisi, dan opini personal dari para penulis dan pendengar.";
@@ -186,7 +186,7 @@ ${articleMeta}<meta name="twitter:card" content="summary_large_image">
 ${head}${graph}
 ${opts.ga ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${opts.ga}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${opts.ga}');</script>` : ""}
-${opts.adsense !== false ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}" crossorigin="anonymous"></script>` : ""}
+${opts.adsense !== false && !opts.assets ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}" crossorigin="anonymous"></script>` : ""}
 </head>
 <body>
 <a class="skip" href="#isi">Langsung ke isi</a>

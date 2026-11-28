@@ -13,6 +13,7 @@ const SITE = "https://antarala.co.id/";
 const IG = "https://www.instagram.com/antarala__/";
 const TT = "https://www.tiktok.com/@antarala__";
 const EMAIL = "antarala@futurinc.co.id";
+const ADSENSE = "ca-pub-3974855070846706"; // Google AdSense (opts.adsense === false untuk mematikan)
 const PARENT = { "@type": "Organization", name: "FUTURINC", url: "https://futurinc.co.id/" };
 const BIO = "Ngomongin musik, kultur, pikiran, dan kabar yang menarik di antaranya.";
 const ABOUT = "Antarala adalah media musik dan kultur pop Indonesia. Kami menulis kabar rilisan dan konser terbaru, feature soal musisi, dan opini personal dari para penulis dan pendengar.";
@@ -185,6 +186,7 @@ ${articleMeta}<meta name="twitter:card" content="summary_large_image">
 ${head}${graph}
 ${opts.ga ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${opts.ga}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${opts.ga}');</script>` : ""}
+${opts.adsense !== false ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}" crossorigin="anonymous"></script>` : ""}
 </head>
 <body>
 <a class="skip" href="#isi">Langsung ke isi</a>
@@ -204,7 +206,7 @@ ${opts.ga ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${op
     <form class="srch" action="${root}cari.html" role="search"><label class="sr" for="dq">Cari</label><input id="dq" name="q" type="search" placeholder="Cari musisi, lagu, konser…"><button class="ic" aria-label="Cari">${I.search}</button></form>
     <p class="drawer-l">Rubrik</p><div class="drawer-g">${SECTIONS.slice(0, 3).map(([h, t]) => `<a href="${root}${h}">${t}</a>`).join("")}</div>
     <p class="drawer-l">Topik</p><div class="drawer-g">${Object.entries(TOPIK).map(([k, t]) => `<a href="${root}topik/${k}.html">${t.nama}</a>`).join("")}</div>
-    <p class="drawer-l">Antarala</p><div class="drawer-g"><a href="${root}tentang.html">Tentang</a><a href="${root}pedoman.html">Pedoman redaksi</a><a href="${root}kontak.html">Kontak</a><a href="${root}rilis-pers.html">Kirim rilis pers</a><a href="${root}brief.html">Kirim brief rilisan</a><a href="${mailto("Sumbang Tulisan")}">Sumbang tulisan</a></div>
+    <p class="drawer-l">Antarala</p><div class="drawer-g"><a href="${root}tentang.html">Tentang</a><a href="${root}pedoman.html">Pedoman redaksi</a><a href="${root}kontak.html">Kontak</a><a href="${root}privasi.html">Kebijakan privasi</a><a href="${root}rilis-pers.html">Kirim rilis pers</a><a href="${root}brief.html">Kirim brief rilisan</a><a href="${mailto("Sumbang Tulisan")}">Sumbang tulisan</a></div>
     ${follow()}
   </div>
 </div>
@@ -216,7 +218,7 @@ ${body}
     <div class="ft-b"><img src="${A}img/logo-light.png" alt="antarala" width="134" height="30" loading="lazy"><p>${ABOUT}</p>${follow()}</div>
     <div><h2>Rubrik</h2><ul>${SECTIONS.slice(0, 3).map(([h, t]) => `<li><a href="${root}${h}">${t}</a></li>`).join("")}<li><a href="${root}cari.html">Cari</a></li></ul></div>
     <div><h2>Topik</h2><ul>${Object.entries(TOPIK).map(([k, t]) => `<li><a href="${root}topik/${k}.html">${t.nama}</a></li>`).join("")}</ul></div>
-    <div><h2>Antarala</h2><ul><li><a href="${root}tentang.html">Tentang</a></li><li><a href="${root}pedoman.html">Pedoman redaksi</a></li><li><a href="${root}kontak.html">Kontak</a></li><li><a href="${root}rilis-pers.html">Kirim rilis pers</a></li><li><a href="${root}brief.html">Kirim brief rilisan</a></li><li><a href="${SITE}feed.xml">${I.rss} RSS</a></li></ul></div>
+    <div><h2>Antarala</h2><ul><li><a href="${root}tentang.html">Tentang</a></li><li><a href="${root}pedoman.html">Pedoman redaksi</a></li><li><a href="${root}kontak.html">Kontak</a></li><li><a href="${root}privasi.html">Kebijakan privasi</a></li><li><a href="${root}rilis-pers.html">Kirim rilis pers</a></li><li><a href="${root}brief.html">Kirim brief rilisan</a></li><li><a href="${SITE}feed.xml">${I.rss} RSS</a></li></ul></div>
   </div>
   <p class="ft-c">© ${YEAR} Antarala. Bagian dari <a href="https://futurinc.co.id/" rel="noopener">FUTURINC</a>. · <a href="mailto:${EMAIL}">${EMAIL}</a></p>
 </div></footer>
@@ -445,6 +447,25 @@ ${follow()}`, "", [{ "@type": "AboutPage", "@id": SITE + "tentang.html", url: SI
 <p>Kalau kamu menemukan kesalahan, kirim email ke <a href="${mailto("Koreksi")}">${EMAIL}</a> dengan subjek "Koreksi". Tulisan yang diperbaiki akan diperbarui tanggalnya.</p>
 <h2>Kerja sama</h2>
 <p>Konten kerja sama atau berbayar akan kami tandai dengan jelas.</p>`);
+
+  staticPage("privasi.html", "Kebijakan Privasi Antarala", "Kebijakan privasi Antarala: data apa yang dikumpulkan saat kamu membaca situs ini, penggunaan cookie, iklan Google AdSense, Google Analytics, dan cara menolaknya.", "Kebijakan privasi", `
+<p class="st-l">Halaman ini menjelaskan data apa yang dikumpulkan saat kamu membuka antarala.co.id dan bagaimana data itu dipakai. Terakhir diperbarui 28 November 2026.</p>
+<h2>Data yang kami kumpulkan</h2>
+<p>Kamu bisa membaca semua tulisan di Antarala tanpa membuat akun. Kami tidak meminta nama, email, atau data pribadi lain kecuali kamu sendiri yang mengirimkannya, misalnya lewat email ke <a href="mailto:${EMAIL}">${EMAIL}</a> atau formulir brief rilisan. Data yang kamu kirim itu hanya dipakai untuk membalas atau menindaklanjuti kirimanmu.</p>
+<h2>Cookie dan statistik pengunjung</h2>
+<p>Kami memakai Google Analytics untuk mengetahui jumlah pengunjung, halaman yang dibaca, dan asal kunjungan secara umum. Google Analytics menyimpan cookie di browser kamu dan mengumpulkan data seperti jenis perangkat, browser, perkiraan lokasi, dan halaman yang dibuka. Kami tidak memakai data ini untuk mengenali kamu secara pribadi.</p>
+<h2>Iklan Google AdSense</h2>
+<p>Antarala menampilkan iklan dari Google AdSense untuk membiayai operasional redaksi. Vendor pihak ketiga, termasuk Google, menggunakan cookie untuk menayangkan iklan berdasarkan kunjungan kamu sebelumnya ke situs ini atau situs lain.</p>
+<p>Kamu bisa menonaktifkan iklan yang dipersonalisasi lewat <a href="https://adssettings.google.com" rel="nofollow noopener" target="_blank">Setelan Iklan Google</a>, atau menonaktifkan cookie vendor pihak ketiga untuk iklan yang dipersonalisasi lewat <a href="https://www.aboutads.info/choices" rel="nofollow noopener" target="_blank">aboutads.info</a>. Penjelasan lengkap dari Google ada di halaman <a href="https://policies.google.com/technologies/ads" rel="nofollow noopener" target="_blank">cara Google menggunakan cookie dalam iklan</a>.</p>
+<p>Iklan tidak memengaruhi isi tulisan. Konten kerja sama atau berbayar akan kami tandai dengan jelas sesuai <a href="pedoman.html">pedoman redaksi</a>.</p>
+<h2>Video YouTube</h2>
+<p>Video di artikel kami ditampilkan lewat mode privasi YouTube (youtube-nocookie.com) dan baru dimuat setelah kamu menekan tombol putar. Setelah diputar, kebijakan privasi Google dan YouTube yang berlaku.</p>
+<h2>Mengatur atau menghapus cookie</h2>
+<p>Kamu bisa menolak atau menghapus cookie kapan saja lewat pengaturan browser. Situs tetap bisa dibaca, tapi iklan yang tampil mungkin jadi kurang relevan.</p>
+<h2>Tautan ke situs lain</h2>
+<p>Tulisan kami sering menautkan sumber dari media atau situs lain. Kebijakan privasi situs-situs itu di luar tanggung jawab kami.</p>
+<h2>Perubahan dan kontak</h2>
+<p>Kebijakan ini bisa kami perbarui sewaktu-waktu, dan tanggal pembaruannya akan tercantum di atas. Pertanyaan soal privasi bisa dikirim ke <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>`);
 
   const opt = [["Kerja sama & iklan", "Kolaborasi konten, promosi rilisan, atau kampanye brand bersama Antarala.", "Inquiry Kerja Sama"],
     ["Kirim rilis pers", "Musisi, label, atau penyelenggara acara yang ingin kabarnya diliput. Panduannya ada di halaman Kirim rilis pers.", "Rilis Pers"],
